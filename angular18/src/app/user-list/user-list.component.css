@@ -1,96 +1,121 @@
 /* Set a colorful purple gradient background for the whole page */
 body {
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    background: linear-gradient(135deg, #8e44ad, #9b59b6); /* Purple gradient */
-    font-family: 'Roboto', sans-serif; /* Modern, readable font */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh; /* Full viewport height */
-    padding-left: 20px; /* Add padding to the left to center content */
-    box-sizing: border-box; /* Ensure padding is included in the layout */
-  }
-  
-  /* Container for the user cards */
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #8e44ad, #9b59b6); /* Purple gradient */
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-left: 20px;
+  box-sizing: border-box;
+}
+
+/* Loading container styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loading-container p {
+  margin-top: 15px;
+  font-size: 18px;
+  color: #333;
+}
+
+/* Container for the user cards */
+.user-card-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  max-width: 1200px;
+  width: 100%;
+  justify-items: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Style for each user name box */
+.user-name {
+  background-color: #f0e5ff;
+  padding: 20px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #4e4e4e;
+  border-radius: 15px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  box-sizing: border-box;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.user-name:hover {
+  transform: scale(1.05);
+  box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
+  background-color: #d9a7ff;
+  color: #2a2a2a;
+}
+
+/* Show additional user details when hovered */
+.user-details {
+  background-color: #f5f5f5;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 10px;
+  color: #4a4a4a;
+  font-size: 0.9rem;
+}
+
+/* Style the container for individual cards */
+.user-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #f8f9fc;
+  padding: 25px;
+  border-radius: 20px;
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid #e1e6ef;
+}
+
+.user-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Make the cards responsive */
+@media (max-width: 768px) {
   .user-card-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Make columns auto-adjust based on screen size */
-    gap: 20px; /* Consistent space between the items */
-    padding: 20px;
-    max-width: 1200px;
-    width: 100%;
-    box-sizing: border-box;
-    justify-items: center; /* Center each item inside the grid */
-    margin-left: auto; /* Center the grid horizontally */
-    margin-right: auto;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
   }
-  
-  /* Style for each user name box */
-  .user-name {
-    background-color: #ffffff; /* White background for name box */
-    padding: 20px;
-    text-align: center;
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #4e4e4e; /* Slightly darker text for contrast */
-    border-radius: 15px; /* Rounded corners */
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    cursor: pointer;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #f0e5ff; /* Light purple background for the name box */
-    width: 100%; /* Ensure name box takes up full space of the grid cell */
-    box-sizing: border-box;
-    text-overflow: ellipsis; /* In case names are too long */
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  
-  /* Hover effect for the name box */
-  .user-name:hover {
-    transform: scale(1.05); /* Slightly enlarge on hover */
-    box-shadow: 0px 8px 15px rgba(0, 0, 0, 0.2);
-    background-color: #d9a7ff; /* Lighter purple on hover */
-    color: #2a2a2a; /* Darker text color for better contrast on hover */
-  }
-  
-  /* Show additional user details when hovered */
-  .user-details {
-    background-color: #f5f5f5; /* Light grey background for details */
-    padding: 15px;
-    border-radius: 10px;
-    margin-top: 10px;
-    color: #4a4a4a; /* Lighter grey for text */
-    font-size: 0.9rem;
-  }
-  
-  /* Style the container for individual cards */
-  .user-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: #ffffff;
-    padding: 25px;
-    border-radius: 20px;
-    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: #f8f9fc; /* Light background for the entire card */
-    border: 2px solid #e1e6ef; /* Soft border to distinguish cards */
-  }
-  
-  /* Hover effect for user cards */
-  .user-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
-  }
-  
-  /* Make the cards responsive */
-  @media (max-width: 768px) {
-    .user-card-container {
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); /* Adjust for smaller screens */
-      gap: 15px; /* Adjust gap for smaller screens */
-    }
-  }
-  
+}

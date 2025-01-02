@@ -1,17 +1,23 @@
-<div class="user-card-container">
-    <div *ngFor="let user of users" class="user-card">
-      <div
-        class="user-name"
-        (mouseenter)="onHover(user.id)"
-        (mouseleave)="onLeave()"
-        (click)="onHover(user.id)"
-      >
-        {{ user.name }}
-      </div>
-      <div *ngIf="selectedUserId === user.id" class="user-details">
-        <p>Email: {{ user.email }}</p>
-        <p>ID: {{ user.id }}</p>
-      </div>
+<!-- Loading animation and message -->
+<div *ngIf="isLoading" class="loading-container">
+  <div class="loading-spinner"></div>
+  <p>Data is getting loaded from Atlas...</p>
+</div>
+
+<!-- User list content -->
+<div *ngIf="!isLoading" class="user-card-container">
+  <div *ngFor="let user of users" class="user-card">
+    <div
+      class="user-name"
+      (mouseenter)="onHover(user.id)"
+      (mouseleave)="onLeave()"
+      (click)="onHover(user.id)"
+    >
+      {{ user.name }}
+    </div>
+    <div *ngIf="selectedUserId === user.id" class="user-details">
+      <p>Email: {{ user.email }}</p>
+      <p>ID: {{ user.id }}</p>
     </div>
   </div>
-  
+</div>

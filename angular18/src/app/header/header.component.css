@@ -1,23 +1,56 @@
-header {
-    padding: 20px;
-    background-color: #8e44ad; /* Purple background for the header */
-    color: white;
-    text-align: center;
+.layout-container {
+  display: flex;
+  height: 100vh; /* Full height layout */
+}
+
+
+  .side-header {
+    width: 200px; /* Adjust width as needed */
+    background: linear-gradient(to bottom, #6a11cb, #2575fc); /* Gradient background */
+    padding: 10px;
+    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2); /* Add shadow on the right side */
+    border-radius: 5px; /* Optional rounded corners for the header */
   }
   
-  nav button {
-    margin: 0 15px;
-    padding: 10px 20px;
-    font-size: 1.1rem;
-    background-color: #ffffff;
-    color: #8e44ad;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+
+
+.side-header nav {
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+}
+
+.side-header button {
+  margin: 5px 0; /* Add spacing between buttons */
+  padding: 10px; /* Adjust padding */
+  text-align: left; /* Align text to the left */
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+}
+
+.side-header button.active {
+  background-color: #007bff; /* Highlight active link */
+  color: white;
+  border-radius: 5px; /* Optional rounded corners */
+}
+
+.main-content {
+  flex-grow: 1; /* Take up remaining space */
+  padding: 20px;
+  overflow-y: auto; /* Allow scrolling if needed */
+}
+@media (max-width: 768px) {
+  .layout-container {
+    flex-direction: column; /* Stack header and content vertically */
   }
-  
-  nav button:hover {
-    background-color: #f0e5ff;
+  .side-header {
+    width: 100%; /* Full width */
+    box-shadow: none; /* Remove shadow */
   }
-  
+  .side-header nav {
+    flex-direction: row; /* Stack buttons horizontally */
+  }
+  .side-header button {
+    margin: 0 5px; /* Adjust spacing for horizontal layout */
+  }
+}
