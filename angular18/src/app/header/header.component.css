@@ -1,0 +1,23 @@
+header {
+    padding: 20px;
+    background-color: #8e44ad; /* Purple background for the header */
+    color: white;
+    text-align: center;
+  }
+  
+  nav button {
+    margin: 0 15px;
+    padding: 10px 20px;
+    font-size: 1.1rem;
+    background-color: #ffffff;
+    color: #8e44ad;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  nav button:hover {
+    background-color: #f0e5ff;
+  }
+  
