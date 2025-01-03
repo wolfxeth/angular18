@@ -3,35 +3,49 @@
   height: 100vh; /* Full height layout */
 }
 
-
-  .side-header {
-    width: 200px; /* Adjust width as needed */
-    background: linear-gradient(to bottom, #6a11cb, #2575fc); /* Gradient background */
-    padding: 10px;
-    box-shadow: 4px 0 15px rgba(0, 0, 0, 0.2); /* Add shadow on the right side */
-    border-radius: 5px; /* Optional rounded corners for the header */
-  }
-  
-
+.side-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 15%;
+  max-width: 50rem;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+  background: linear-gradient(to bottom, #2c0a4c, #450d80);
+  padding: 1rem;
+  border-bottom-right-radius: 12px;
+  border-bottom-left-radius: 12px;
+  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+}
 
 .side-header nav {
   display: flex;
   flex-direction: column; /* Stack buttons vertically */
+  width: 100%;
+  gap: 10px;
 }
 
 .side-header button {
-  margin: 5px 0; /* Add spacing between buttons */
-  padding: 10px; /* Adjust padding */
-  text-align: left; /* Align text to the left */
-  background-color: transparent;
-  border: none;
+  font: inherit;
   cursor: pointer;
+  background-color: #9965dd;
+  border-radius: 4px;
+  border: none;
+  padding: 0.35rem 0.8rem;
+  font-size: 0.9rem;
 }
 
+/* Hover effect */
+.side-header button:hover {
+  background-color: #150722; /* Change color on hover */
+  color: #ffffff; /* Change text color on hover */
+}
+
+/* Active state */
 .side-header button.active {
-  background-color: #007bff; /* Highlight active link */
-  color: white;
-  border-radius: 5px; /* Optional rounded corners */
+  background-color: #9965dd; /* Color for active state */
+  color: #fff; /* Text color for active state */
 }
 
 .main-content {
@@ -39,6 +53,7 @@
   padding: 20px;
   overflow-y: auto; /* Allow scrolling if needed */
 }
+
 @media (max-width: 768px) {
   .layout-container {
     flex-direction: column; /* Stack header and content vertically */
