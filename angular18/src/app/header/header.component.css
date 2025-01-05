@@ -16,7 +16,8 @@
   padding: 1rem;
   border-bottom-right-radius: 12px;
   border-bottom-left-radius: 12px;
-  box-shadow: 0 1px 8px rgba(0, 0, 0, 0.6);
+  box-shadow: 0 1px 8px #9c6d6d99;
+  
 }
 
 .side-header nav {

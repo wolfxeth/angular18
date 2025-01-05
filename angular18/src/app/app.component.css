@@ -1,0 +1,15 @@
+div{
+    font-weight: 200;
+    margin: 0 auto;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 14px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 8px #9c6d6d99;
+    background-color: rgb(61, 35, 83);
+    opacity: 0.5;
+    color: #ffffff;
+    height: max-content;
+}

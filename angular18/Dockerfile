@@ -12,6 +12,10 @@ RUN npm run build
 
 FROM nginx:alpine
 
+# Copy custom NGINX config
+COPY nginx.conf /etc/nginx/nginx.conf
+
+
 COPY --from=build /app/dist/angular18/browser /usr/share/nginx/html
 
 EXPOSE 80
