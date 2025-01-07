@@ -1,30 +1,29 @@
 .layout-container {
   display: flex;
-  height: 100vh; /* Full height layout */
+  flex-direction: column; /* Stack header on top and content below */
+  height: 100vh; /* Full viewport height */
 }
 
 .side-header {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  width: 15%;
-  max-width: 50rem;
-  margin: 0 auto 2rem auto;
-  text-align: center;
+  flex-direction: row; /* Align header horizontally */
+  justify-content: space-between; /* Distribute space between header items */
+  align-items: center; /* Vertically center items in the header */
+  width: 100%; /* Full width of the screen */
   background: linear-gradient(to bottom, #2c0a4c, #450d80);
-  padding: 1rem;
-  border-bottom-right-radius: 12px;
-  border-bottom-left-radius: 12px;
+  padding: 1rem 2rem; /* Adjust padding for top header */
   box-shadow: 0 1px 8px #9c6d6d99;
-  
+  color: white;
+  font-size: 1.5rem; /* Adjust font size for header */
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000; /* Ensure the header stays on top */
 }
 
 .side-header nav {
   display: flex;
-  flex-direction: column; /* Stack buttons vertically */
-  width: 100%;
-  gap: 10px;
+  gap: 20px;
 }
 
 .side-header button {
@@ -49,24 +48,30 @@
   color: #fff; /* Text color for active state */
 }
 
+/* Main content */
 .main-content {
-  flex-grow: 1; /* Take up remaining space */
+  margin-top: 80px; /* Offset the content to account for the fixed header */
   padding: 20px;
+  flex-grow: 1; /* Take up remaining space */
   overflow-y: auto; /* Allow scrolling if needed */
 }
 
+/* Media query for mobile */
 @media (max-width: 768px) {
   .layout-container {
     flex-direction: column; /* Stack header and content vertically */
   }
   .side-header {
+    flex-direction: column; /* Stack header elements vertically on small screens */
     width: 100%; /* Full width */
-    box-shadow: none; /* Remove shadow */
+    padding: 1rem; /* Adjust padding */
+    box-shadow: none; /* Optional: Remove shadow on small screens */
   }
   .side-header nav {
-    flex-direction: row; /* Stack buttons horizontally */
+    flex-direction: row; /* Align buttons horizontally */
+    gap: 5px; /* Adjust gap for smaller screens */
   }
   .side-header button {
-    margin: 0 5px; /* Adjust spacing for horizontal layout */
+    font-size: 0.8rem; /* Smaller button font size on small screens */
   }
 }

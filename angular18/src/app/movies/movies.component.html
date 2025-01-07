@@ -1,0 +1,30 @@
+<div *ngIf="movies.length > 0; else loading">
+    <h1>Movies List</h1>
+    
+    <!-- Grid Container for Movie Cards -->
+    <div class="movie-grid">
+      <div class="movie-card" *ngFor="let movie of movies">
+        <img [src]="movie.poster" alt="Movie Poster" class="movie-poster"/>
+        <h2>{{ movie.title }}</h2>
+        <p>{{ movie.plot | slice:0:100 }}...</p>  <!-- Limit plot text length -->
+      </div>
+    </div>
+  
+    <!-- Pagination Controls -->
+    <div class="pagination">
+      <button (click)="prevPage()" [disabled]="currentPage <= 0">Previous</button>
+      
+      <!-- Dynamically create page buttons -->
+      <button *ngFor="let i of [].constructor(totalPages); let pageIndex = index"
+              (click)="goToPage(pageIndex)" [class.active]="currentPage === pageIndex">
+        {{ pageIndex + 1 }}
+      </button>
+      
+      <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Next</button>
+    </div>
+  </div>
+  
+  <ng-template #loading>
+    <p>Loading...</p>
+  </ng-template>
+  
