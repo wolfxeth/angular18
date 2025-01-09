@@ -2,34 +2,34 @@ import { Component, OnInit } from '@angular/core';
 import { Movies } from '../modals/Movies';
 import { UserService } from '../user-service.service';
 import { CommonModule } from '@angular/common';
+import { MovieCardComponent } from '../movie-card/movie-card.component';  // Import the MovieCardComponent
 
 @Component({
   selector: 'app-movies',
-  imports: [CommonModule],
   templateUrl: './movies.component.html',
-  styleUrls: ['./movies.component.css']  // Fixed typo from styleUrl to styleUrls
+  styleUrls: ['./movies.component.css'],
+  imports: [CommonModule, MovieCardComponent]  // Make sure MovieCardComponent is declared here
 })
 export class MoviesComponent implements OnInit {
   movies: Movies[] = [];  // Movies to display on the current page
-  currentPage: number = 0;  // Current page (0-indexed)
-  pageSize: number = 50;    // Number of movies per page
-  totalMovies: number = 0;  // Total number of movies (for pagination controls)
-  totalPages: number = 0;   // Total pages available
-  selectedMovie: Movies | null = null;  // To store the selected movie for showing full details
-  defaultPoster: string = '404.png';  // Path to default poster image
+  currentPage: number = 0;
+  pageSize: number = 50;
+  totalMovies: number = 0;
+  totalPages: number = 0;
+  selectedMovie: Movies | null = null;
 
-  constructor(private userservice: UserService) { }
+  constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.loadMovies(this.currentPage, this.pageSize); 
+    this.loadMovies(this.currentPage, this.pageSize);
   }
 
   loadMovies(page: number, size: number): void {
-    this.userservice.getMovies(page, size).subscribe({
+    this.userService.getMovies(page, size).subscribe({
       next: (data: any) => {
-        this.movies = data.content;  // Get the movies for the current page
-        this.totalMovies = data.totalElements;  // Total number of movies
-        this.totalPages = data.totalPages;  // Total pages available
+        this.movies = data.content;
+        this.totalMovies = data.totalElements;
+        this.totalPages = data.totalPages;
       },
       error: (err) => {
         console.error('Error fetching movies', err);
@@ -37,22 +37,16 @@ export class MoviesComponent implements OnInit {
     });
   }
 
-  // Movie poster click handler
+  // Movie details handler (to show details when a card is clicked)
   showMovieDetails(movie: Movies): void {
     this.selectedMovie = movie;
   }
-
-  // Close the movie details view
-  closeMovieDetails(): void {
+   // Close movie details modal
+   closeMovieDetails(): void {
     this.selectedMovie = null;
   }
 
-  // Method to set the default poster if the original image fails to load
-  setDefaultPoster(event: any): void {
-    event.target.src = this.defaultPoster; // Set to default image
-  }
-
-  // Navigate to the next page
+  // Pagination methods
   nextPage(): void {
     if (this.currentPage < this.totalPages - 1) {
       this.currentPage++;
@@ -60,7 +54,6 @@ export class MoviesComponent implements OnInit {
     }
   }
 
-  // Navigate to the previous page
   prevPage(): void {
     if (this.currentPage > 0) {
       this.currentPage--;
@@ -68,11 +61,15 @@ export class MoviesComponent implements OnInit {
     }
   }
 
-  // Navigate to a specific page
   goToPage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
       this.currentPage = page;
       this.loadMovies(this.currentPage, this.pageSize);
     }
+  }
+
+  // Track movie by its unique id (for better performance in *ngFor)
+  trackByMovieId(index: number, movie: Movies): string {
+    return movie._id;  // Assuming 'id' is a unique string property for each movie
   }
 }

@@ -1,0 +1,49 @@
+/* Movie Card Styles */
+.movie-card {
+    background-color: hsl(325.11deg 62% 29% / 32%);
+    border-radius: 1px;
+    padding: 0px;
+    text-align: left;
+    box-shadow: 0 4px 8px hwb(0 83% 14% / 0.834);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    cursor: pointer;
+    overflow: hidden;
+  }
+  
+  .movie-card:hover {
+    transform: scale(1.05);
+    transition: transform 0.3s ease;
+  }
+  
+  .movie-card h2 {
+    font-size: 16px;
+    margin-top: 5px;
+    font-weight: bold;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    color: white;
+    margin-bottom: 3px;
+  }
+  
+  .movie-card p {
+    font-size: 14px;
+    color: white;
+    margin-top: 3px;
+    margin-bottom: 5px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  
+  .movie-poster {
+    width: 100%;
+    height: auto;
+    max-height: 300px;
+    object-fit: cover;
+    border-radius: 1px;
+    margin-bottom: 10px;
+  }
+  
