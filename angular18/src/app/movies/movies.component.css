@@ -2,7 +2,7 @@
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Creates columns with min 200px width */
-  gap: 15px;  /* Reduced space between grid items */
+  gap: 16px;  /* Reduced space between grid items */
   margin-top: 20px;
   align-items: stretch;  /* Ensures grid items stretch to the same height */
 }
@@ -19,6 +19,7 @@
   height: 100%;  /* Ensure the card stretches to fill the grid cell */
   cursor: pointer;  /* Make it clear the card is clickable */
   overflow: hidden; /* Ensure no extra space in the card */
+  max-width: 100%;  /* Ensure the card doesn't overflow */
 }
 
 /* Adjust hover effect */
@@ -77,7 +78,7 @@
 /* Flex Layout for Modal */
 .modal-content {
   display: flex;
-  background-color: #fff;
+  background-color:#0000008f;
   padding: 20px;
   border-radius: 8px;
   max-width: 800px;
@@ -145,3 +146,42 @@
 .pagination button:hover {
   background-color: #0056b3;
 }
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: end; /* Align items to the left */
+  gap: 15px; /* Space between the label and dropdown */
+  margin-bottom: 20px;
+  background-color: #85867873; /* Light background for the filter */
+  padding: 10px 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header label {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0;
+}
+
+.header select {
+  padding: 5px 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: #fff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.header select:hover {
+  border-color: #007bff;
+}
+
+.header select:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+

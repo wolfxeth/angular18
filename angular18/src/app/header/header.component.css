@@ -10,7 +10,8 @@
   justify-content: space-between; /* Distribute space between header items */
   align-items: center; /* Vertically center items in the header */
   width: 100%; /* Full width of the screen */
-  background: linear-gradient(to bottom, #2c0a4c, #450d80);
+  /* background: linear-gradient(to bottom, #2c0a4c, #450d80); */
+  background: linear-gradient(to bottom, #000000, #00000000);;
   padding: 1rem 2rem; /* Adjust padding for top header */
   box-shadow: 0 1px 8px #9c6d6d99;
   color: white;
@@ -29,11 +30,12 @@
 .side-header button {
   font: inherit;
   cursor: pointer;
-  background-color: #9965dd;
+  background-color: hwb(0 0% 100% / 0);
   border-radius: 4px;
   border: none;
   padding: 0.35rem 0.8rem;
   font-size: 0.9rem;
+  color: white;
 }
 
 /* Hover effect */
@@ -44,7 +46,7 @@
 
 /* Active state */
 .side-header button.active {
-  background-color: #9965dd; /* Color for active state */
+  background-color: #85867873; /* Color for active state */
   color: #fff; /* Text color for active state */
 }
 
@@ -53,7 +55,7 @@
   margin-top: 80px; /* Offset the content to account for the fixed header */
   padding: 20px;
   flex-grow: 1; /* Take up remaining space */
-  overflow-y: auto; /* Allow scrolling if needed */
+  /* overflow-y: auto; Allow scrolling if needed */
 }
 
 /* Media query for mobile */

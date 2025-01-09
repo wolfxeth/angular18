@@ -1,4 +1,14 @@
-<div *ngIf="movies.length > 0; else loading">
+
+<div class="header">
+  <label for="year-select">Filter by Year:</label>
+  <select id="year-select" (change)="onYearChange($event)">
+    <option *ngFor="let year of years" [value]="year" [selected]="year === selectedYear">
+      {{ year }}
+    </option>
+  </select>
+</div>
+
+<div *ngIf="movies.length > 0; else noData">
   <h1>Movies List</h1>
 
   <!-- Grid Container for Movie Cards -->
@@ -37,6 +47,7 @@
   </div>
 </div>
 
-<ng-template #loading>
-  <p>The Movies are getting Loaded...</p>
+<ng-template #noData>
+  <p *ngIf="movies.length === 0 && !loading">No movies available for the selected year.</p>
+  <p *ngIf="loading">Movies are getting Loaded...</p>
 </ng-template>
