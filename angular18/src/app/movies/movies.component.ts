@@ -4,14 +4,16 @@ import { UserService } from '../user-service.service';
 import { CommonModule } from '@angular/common';
 import { MovieCardComponent } from '../movie-card/movie-card.component';  // Import the MovieCardComponent
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css'],
-  imports: [CommonModule, MovieCardComponent,MatSnackBarModule]  // Make sure MovieCardComponent is declared here
+  imports: [CommonModule, MovieCardComponent,MatSnackBarModule,FormsModule]  // Make sure MovieCardComponent is declared here
 })
 export class MoviesComponent implements OnInit {
+
   movies: Movies[] = [];  // Movies to display on the current page
   currentPage: number = 0;
   pageSize: number = 50;
@@ -21,6 +23,9 @@ export class MoviesComponent implements OnInit {
   selectedYear: number = new Date().getFullYear(); // Default to the current year
   years: number[] = [];
   loading: boolean = false;
+  searchQuery: string = '';
+  suggestions: Movies[] = [];
+  debounceTimer: any;
 
   constructor(private snackBar: MatSnackBar,private userService: UserService) {}
 
@@ -30,6 +35,39 @@ export class MoviesComponent implements OnInit {
     this.populateYears();
     this.getTopRatedMoviesByYear(this.selectedYear);
 
+  }
+
+  onSearchInput(event: Event): void {
+    const query = (event.target as HTMLInputElement).value;
+    if (query.length < 3) {
+      this.suggestions = [];
+      return;
+    }
+
+    // Debounce API calls
+    if (this.debounceTimer) {
+      clearTimeout(this.debounceTimer);
+    }
+    this.debounceTimer = setTimeout(() => {
+      this.fetchSuggestions(query);
+    }, 300);
+  }
+
+  fetchSuggestions(query: string): void {
+    this.userService.searchMovies(query).subscribe({
+      next: (movies: Movies[]) => {
+        this.suggestions = movies;
+      },
+      error: (err) => {
+        console.error('Error fetching movie suggestions', err);
+        this.suggestions = [];
+      }
+    });
+  }
+
+  selectMovie(movie: Movies): void {
+    this.selectedMovie = movie;
+    this.suggestions = [];
   }
 
 

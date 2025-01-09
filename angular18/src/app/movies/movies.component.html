@@ -1,12 +1,36 @@
 
 <div class="header">
-  <label for="year-select">Filter by Year:</label>
-  <select id="year-select" (change)="onYearChange($event)">
-    <option *ngFor="let year of years" [value]="year" [selected]="year === selectedYear">
-      {{ year }}
-    </option>
-  </select>
+  <!-- Search Input -->
+  <div class="search-container">
+    <input
+      type="text"
+      class="search-input"
+      [(ngModel)]="searchQuery"
+      (input)="onSearchInput($event)"
+      placeholder="Search movies..."
+    />
+    <ul class="suggestion-list" *ngIf="suggestions.length > 0">
+      <li
+        class="suggestion-item"
+        *ngFor="let suggestion of suggestions"
+        (click)="selectMovie(suggestion)"
+      >
+        {{ suggestion.title }}
+      </li>
+    </ul>
+  </div>
+
+  <!-- Year Filter -->
+  <div class="year-filter-container">
+    <label for="year-select" class="year-label">Filter by Year:</label>
+    <select id="year-select" (change)="onYearChange($event)" class="year-select">
+      <option *ngFor="let year of years" [value]="year" [selected]="year === selectedYear">
+        {{ year }}
+      </option>
+    </select>
+  </div>
 </div>
+
 
 <div *ngIf="movies.length > 0; else noData">
   <h1>Movies List</h1>

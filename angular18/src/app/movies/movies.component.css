@@ -148,15 +148,18 @@
 }
 
 .header {
+  position: relative; /* Ensure dropdown is positioned relative to the header */
   display: flex;
   align-items: center;
-  justify-content: end; /* Align items to the left */
-  gap: 15px; /* Space between the label and dropdown */
+  justify-content: space-between; /* Adjust alignment if needed */
+  gap: 15px; /* Space between elements */
   margin-bottom: 20px;
   background-color: #85867873; /* Light background for the filter */
   padding: 10px 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  overflow: visible; /* Allow the dropdown to expand outside the header */
+  z-index: 2; /* Ensure it appears above other elements */
 }
 
 .header label {
@@ -182,6 +185,42 @@
 .header select:focus {
   border-color: #007bff;
   outline: none;
+}
+
+/* Input field styling */
+.search-input {
+  padding: 8px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 300px; /* Adjust width as needed */
+}
+
+/* Suggestion List */
+.suggestion-list {
+  position: absolute;
+  top: calc(100% + 5px); /* Position below the input field with spacing */
+  left: 0;
+  width: 100%; /* Match the input width */
+  background-color: #000000;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-height: 200px; /* Limit dropdown height */
+  overflow-y: auto; /* Enable scrolling if content overflows */
+  z-index: 3; /* Ensure dropdown appears above other elements */
+}
+
+/* Suggestion Item */
+.suggestion-item {
+  padding: 8px 12px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.suggestion-item:hover {
+  background-color: hsl(0, 0%, 0%);
 }
 
 
