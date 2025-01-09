@@ -1,30 +1,49 @@
 <div *ngIf="movies.length > 0; else loading">
-    <h1>Movies List</h1>
-    
-    <!-- Grid Container for Movie Cards -->
-    <div class="movie-grid">
-      <div class="movie-card" *ngFor="let movie of movies">
-        <img [src]="movie.poster" alt="Movie Poster" class="movie-poster"/>
-        <h2>{{ movie.title }}</h2>
-        <p>{{ movie.plot | slice:0:100 }}...</p>  <!-- Limit plot text length -->
-      </div>
-    </div>
-  
-    <!-- Pagination Controls -->
-    <div class="pagination">
-      <button (click)="prevPage()" [disabled]="currentPage <= 0">Previous</button>
-      
-      <!-- Dynamically create page buttons -->
-      <button *ngFor="let i of [].constructor(totalPages); let pageIndex = index"
-              (click)="goToPage(pageIndex)" [class.active]="currentPage === pageIndex">
-        {{ pageIndex + 1 }}
-      </button>
-      
-      <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Next</button>
+  <h1>Movies List</h1>
+
+  <!-- Grid Container for Movie Cards -->
+  <div class="movie-grid">
+    <div class="movie-card" *ngFor="let movie of movies" (click)="showMovieDetails(movie)">
+      <img [src]="movie.poster" alt="Movie Poster" class="movie-poster" (error)="setDefaultPoster($event)">
+      <h2>{{ movie.title }}</h2>
+      <p>{{ movie.genres}}</p>
+      <p>{{"Length:"+ movie.runtime+"min"}}</p>  <!-- Limit plot text length -->
     </div>
   </div>
-  
-  <ng-template #loading>
-    <p>Loading...</p>
-  </ng-template>
-  
+
+  <!-- Movie Details Modal (if selected) -->
+  <div class="movie-details-modal" *ngIf="selectedMovie">
+    <div class="modal-content">
+      <!-- Poster on the left side -->
+      <img [src]="selectedMovie.poster" alt="Movie Poster" class="modal-poster" (error)="setDefaultPoster($event)"/>
+      
+      <!-- Movie details on the right side -->
+      <div class="modal-text">
+        <span class="close-btn" (click)="closeMovieDetails()">&times;</span>
+        <h2>{{ selectedMovie.title }}</h2>
+        <p><strong>Plot:</strong> {{ selectedMovie.plot }}</p>
+        <p><strong>Director:</strong> {{ selectedMovie.directors }}</p>
+        <p><strong>Release Date:</strong> {{ selectedMovie.released | date }}</p>
+        <p><strong>Rating:</strong> {{ selectedMovie.rated }}</p>
+        <p><strong>Genres:</strong> {{ selectedMovie.genres.join(', ') }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Pagination Controls -->
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage <= 0">Previous</button>
+    
+    <!-- Dynamically create page buttons -->
+    <button *ngFor="let i of [].constructor(totalPages); let pageIndex = index"
+            (click)="goToPage(pageIndex)" [class.active]="currentPage === pageIndex">
+      {{ pageIndex + 1 }}
+    </button>
+    
+    <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Next</button>
+  </div>
+</div>
+
+<ng-template #loading>
+  <p>Loading...</p>
+</ng-template>

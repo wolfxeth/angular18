@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpParams  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { User } from './modals/User';
-import { Movies } from './modals/Movies';
 
 
 
@@ -14,6 +13,7 @@ import { Movies } from './modals/Movies';
 export class UserService {
   private apiUrl = 'https://cloudruntest-springboot-509809290508.us-central1.run.app/api/users';
   private apiMovies = 'https://cloudruntest-springboot-509809290508.us-central1.run.app/api/movies'; 
+  //private apiMovies = 'http://localhost:8080/api/movies'; 
 
   constructor(private http: HttpClient) {}
 
