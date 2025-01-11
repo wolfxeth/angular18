@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Movies } from '../modals/Movies';
 import { UserService } from '../user-service.service';
 import { CommonModule } from '@angular/common';
-import { MovieCardComponent } from '../movie-card/movie-card.component';  // Import the MovieCardComponent
+import { MovieCardComponent } from '../movie-card/movie-card.component'; // Import the MovieCardComponent
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { FormsModule } from '@angular/forms';
 
@@ -10,11 +10,10 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-movies',
   templateUrl: './movies.component.html',
   styleUrls: ['./movies.component.css'],
-  imports: [CommonModule, MovieCardComponent,MatSnackBarModule,FormsModule]  // Make sure MovieCardComponent is declared here
+  imports: [CommonModule, MovieCardComponent, MatSnackBarModule, FormsModule], // Make sure MovieCardComponent is declared here
 })
 export class MoviesComponent implements OnInit {
-
-  movies: Movies[] = [];  // Movies to display on the current page
+  movies: Movies[] = []; // Movies to display on the current page
   currentPage: number = 0;
   pageSize: number = 50;
   totalMovies: number = 0;
@@ -27,14 +26,16 @@ export class MoviesComponent implements OnInit {
   suggestions: Movies[] = [];
   debounceTimer: any;
 
-  constructor(private snackBar: MatSnackBar,private userService: UserService) {}
+  constructor(
+    private snackBar: MatSnackBar,
+    private userService: UserService
+  ) {}
 
   ngOnInit(): void {
     this.loadMovies(this.currentPage, this.pageSize);
 
     this.populateYears();
     //this.getTopRatedMoviesByYear(this.selectedYear);
-
   }
 
   onSearchInput(event: Event): void {
@@ -61,7 +62,7 @@ export class MoviesComponent implements OnInit {
       error: (err) => {
         console.error('Error fetching movie suggestions', err);
         this.suggestions = [];
-      }
+      },
     });
   }
 
@@ -70,15 +71,14 @@ export class MoviesComponent implements OnInit {
     this.suggestions = [];
   }
 
-
   // Fetch top-rated movies by selected year
   getTopRatedMoviesByYear(year: number): void {
     this.loading = true; // Set loading to true when starting the request
-  
+
     this.userService.getTopRatedMoviesByYear(year).subscribe({
       next: (data: Movies[]) => {
         this.loading = false; // Set loading to false once data is received
-  
+
         if (data && data.length > 0) {
           this.movies = data;
         } else {
@@ -92,15 +92,13 @@ export class MoviesComponent implements OnInit {
     });
   }
 
-  
   notifyUser(message: string): void {
     // Example: Using a toast or a snackbar to display the message
     this.snackBar.open(message, 'Close', { duration: 3000 });
   }
-  
 
-   // Populate years dropdown
-   populateYears(): void {
+  // Populate years dropdown
+  populateYears(): void {
     const currentYear = new Date().getFullYear();
     for (let year = currentYear; year >= 1970; year--) {
       this.years.push(year);
@@ -131,8 +129,8 @@ export class MoviesComponent implements OnInit {
   showMovieDetails(movie: Movies): void {
     this.selectedMovie = movie;
   }
-   // Close movie details modal
-   closeMovieDetails(): void {
+  // Close movie details modal
+  closeMovieDetails(): void {
     this.selectedMovie = null;
   }
 
@@ -156,12 +154,10 @@ export class MoviesComponent implements OnInit {
       this.currentPage = page;
       this.loadMovies(this.currentPage, this.pageSize);
     }
-
   }
 
   // Track movie by its unique id (for better performance in *ngFor)
   trackByMovieId(index: number, movie: Movies): string {
-    return movie._id;  // Assuming 'id' is a unique string property for each movie
+    return movie._id; // Assuming 'id' is a unique string property for each movie
   }
-  
 }

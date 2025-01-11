@@ -8,27 +8,24 @@ import { signOut } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterModule,CommonModule],
+  imports: [RouterModule, CommonModule],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.css'
+  styleUrl: './header.component.css',
 })
 export class HeaderComponent {
   user: SocialUser | null = null;
-  authService=inject(AuthService);
-  router=inject(Router);
+  authService = inject(AuthService);
+  router = inject(Router);
 
-  logoutcall(){
+  logoutcall() {
     this.authService.logoutcall().subscribe({
-          next: () => {
-            this.router.navigate(['/login']);
-            console.log('Logged out');
-      
-          },
-          error: (error) => {
-            console.error('Logout failed:', error);
-          },
-        });
-        
+      next: () => {
+        this.router.navigate(['/login']);
+        console.log('Logged out');
+      },
+      error: (error) => {
+        console.error('Logout failed:', error);
+      },
+    });
   }
-  
 }
