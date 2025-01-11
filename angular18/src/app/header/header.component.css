@@ -11,10 +11,10 @@
   align-items: center; /* Vertically center items in the header */
   width: 100%; /* Full width of the screen */
   /* background: linear-gradient(to bottom, #2c0a4c, #450d80); */
-  background: linear-gradient(to bottom, #000000, #00000000);;
+  background: black;
   padding: 1rem 2rem; /* Adjust padding for top header */
   box-shadow: 0 1px 8px #9c6d6d99;
-  color: white;
+  color: black;
   font-size: 1.5rem; /* Adjust font size for header */
   position: fixed;
   top: 0;
@@ -56,6 +56,39 @@
   padding: 20px;
   flex-grow: 1; /* Take up remaining space */
   /* overflow-y: auto; Allow scrolling if needed */
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.auth-section button {
+  padding: 0.5rem 1rem;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.auth-section button:hover {
+  background-color: #0056b3;
+}
+
+/* Logo Container */
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo Image */
+.logo {
+  max-width: 100%;
+  height: auto;
+  max-height: 50px; /* Adjust height based on your design */
 }
 
 /* Media query for mobile */

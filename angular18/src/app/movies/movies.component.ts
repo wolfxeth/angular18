@@ -33,7 +33,7 @@ export class MoviesComponent implements OnInit {
     this.loadMovies(this.currentPage, this.pageSize);
 
     this.populateYears();
-    this.getTopRatedMoviesByYear(this.selectedYear);
+    //this.getTopRatedMoviesByYear(this.selectedYear);
 
   }
 

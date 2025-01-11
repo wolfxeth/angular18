@@ -14,7 +14,7 @@ body {
   justify-content: center;
   align-items: center;
   height: 100vh; /* Full viewport height */
-  background: radial-gradient(circle at top left, #181023, #0b0519);
+  background: white;
   padding: 0 20px; /* Add some padding on mobile */
   box-sizing: border-box;
 }
@@ -22,10 +22,10 @@ body {
 .welcome-message {
   text-align: center;
   max-width: 800px;
-  background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+  background:rgb(255, 255, 255); /* Semi-transparent white background */
   padding: 40px;
   border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 30px #000000c5;
   color: #333;
   backdrop-filter: blur(5px); /* Soft blur effect behind */
   transition: all 0.3s ease-in-out;

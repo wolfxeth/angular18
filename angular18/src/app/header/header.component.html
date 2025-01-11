@@ -1,12 +1,30 @@
 <div class="layout-container">
   <header class="side-header">
+    <!-- Add logo section -->
+    <div class="logo-container">
+      <img src="LOGO.png" alt="Logo" class="logo" />
+    </div>
     <nav>
       <!-- Use buttons with routerLinkActive -->
+      @if(authService.currentUserSig()){
       <button routerLink="/home" routerLinkActive="active">Home</button>
       <button routerLink="/users" routerLinkActive="active">User Details</button>
       <button routerLink="/movies" routerLinkActive="active">Movies</button>
+      
+      <button (click)="logoutcall()" routerLinkActive="active">Logout</button>
+      }
 
     </nav>
+     <!-- Google Login Section -->
+     <!-- <div class="auth-section">
+      <div *ngIf="user; else loggedOut">
+        <span>Welcome, {{ user.name }}</span>
+        <button (click)="signOut()">Sign Out</button>
+      </div>
+      <ng-template #loggedOut>
+        <button (click)="signInWithGoogle()">Sign In with Google</button>
+      </ng-template>
+    </div> -->
   </header>
   <main class="main-content">
     <!-- Main content goes here -->

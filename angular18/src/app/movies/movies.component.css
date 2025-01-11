@@ -2,9 +2,9 @@
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Creates columns with min 200px width */
-  gap: 16px;  /* Reduced space between grid items */
+  gap: 24px; /* Increased space between grid items */
   margin-top: 20px;
-  align-items: stretch;  /* Ensures grid items stretch to the same height */
+  align-items: stretch; /* Ensures grid items stretch to the same height */
 }
 
 /* Movie Card Styling */
@@ -16,10 +16,11 @@
   box-shadow: 0 4px 8px hwb(0 83% 14% / 0.834);
   display: flex;
   flex-direction: column;
-  height: 100%;  /* Ensure the card stretches to fill the grid cell */
-  cursor: pointer;  /* Make it clear the card is clickable */
+  height: 100%; /* Ensure the card stretches to fill the grid cell */
+  cursor: pointer; /* Make it clear the card is clickable */
   overflow: hidden; /* Ensure no extra space in the card */
-  max-width: 100%;  /* Ensure the card doesn't overflow */
+  max-width: 100%; /* Ensure the card doesn't overflow */
+  margin-bottom: 16px; /* Add extra bottom spacing for individual cards */
 }
 
 /* Adjust hover effect */
@@ -154,7 +155,7 @@
   justify-content: space-between; /* Adjust alignment if needed */
   gap: 15px; /* Space between elements */
   margin-bottom: 20px;
-  background-color: #85867873; /* Light background for the filter */
+  background-color: hsl(0, 0%, 0%); /* Light background for the filter */
   padding: 10px 20px;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
