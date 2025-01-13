@@ -44,7 +44,7 @@ export class AuthService {
     } 
 
   isLoggedIn(): boolean {
-    return this.currentUserSig() !== null;
+    return this.firebaseAuth.currentUser !== null; 
   }
 
   
