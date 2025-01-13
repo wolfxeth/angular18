@@ -224,4 +224,18 @@
   background-color: hsl(0, 0%, 0%);
 }
 
+.no-data-message {
+  font-size: 1.5rem; /* Increase the font size */
+  font-weight: bold; /* Optional: Make the text bold */
+  text-align: center; /* Optional: Center align the text */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4), 0 0 25px hsl(0, 0%, 0%), 0 0 5px #000000; /* Add text shadow to create a border effect */
+}
+
+.loading-message {
+  font-size: 1.5rem; /* Increase the font size */
+  font-weight: bold; /* Optional: Make the text bold */
+  text-align: center; /* Optional: Center align the text */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4), 0 0 25px hwb(0 0% 100%), 0 0 5px #090909; /* Add text shadow to create a border effect */
+}
+
 

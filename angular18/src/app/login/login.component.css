@@ -1,35 +1,107 @@
-/* Container styling */
+/* Login Form Container */
 .login-form-container {
-  max-width: 400px;
-  margin: 50px auto;
-  padding: 20px;
+  position: relative; /* For layered effect */
+  background: white; /* Card background */
+  padding: 40px;
+  border-radius: 15px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+  color: #333;
+  width: 400px; /* Fixed width */
+  min-height: 500px; /* Set minimum height for consistent size */
   display: flex;
-  flex-direction: column;
-  gap: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  flex-direction: column; /* Stack content vertically */
+  justify-content: center; /* Center content vertically */
+  gap: 20px; /* Space between form fields */
+  margin: 50px auto; /* Center the form */
+  text-align: left; /* Align text to the left */
+  border: 2px solid #ff9900; /* Highlight border */
 }
 
-/* Title styling */
+.login-form-container::before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 100%;
+  height: 100%;
+  background: #ff9900; /* Background color for the shadow */
+  border-radius: 15px; /* Match card border radius */
+  z-index: -1; /* Place behind the card */
+}
+
+/* Title Styling */
 .form-title {
   text-align: center;
-  font-size: 1.8rem;
-  font-weight: 600;
+  font-size: 1.8rem; /* Larger title text */
+  font-weight: bold;
   color: #333;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-/* Form field styling */
+/* Form Field Styling */
 .form-field {
   width: 100%;
 }
 
-/* Login button styling */
+mat-form-field {
+  width: 100%;
+}
+
+/* Login Button Styling */
 .login-button {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  background-color: #6a11cb; /* Purple accent color */
+  color: white;
+  border: none;
+  border-radius: 8px; /* Rounded button */
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out, transform 0.2s;
+}
+
+.login-button:hover {
+  background-color: #4e0c99; /* Darker purple on hover */
+  transform: translateY(-3px); /* Slight lift effect */
+}
+
+.login-button:disabled {
+  background-color: #ccc; /* Disabled state color */
+  cursor: not-allowed;
+}
+
+/* Error Message Styling */
+.error-message {
+  color: #ff0000; /* Red color for errors */
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-align: center;
+}
+.register-button {
   width: 100%;
   padding: 10px;
   font-size: 1rem;
   font-weight: 500;
   text-transform: uppercase;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-form-container {
+    width: 90%; /* Adjust width for smaller screens */
+    min-height: auto; /* Remove fixed height on small screens */
+    padding: 20px;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .login-button {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
 }

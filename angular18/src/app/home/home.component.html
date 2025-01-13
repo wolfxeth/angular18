@@ -1,11 +1,24 @@
-<!-- home.component.html -->
-
 <div class="welcome-container">
-    <div class="welcome-message">
-      <h1>Hey, this is Akshay, your host for the application!</h1>
+  <!-- First Card -->
+  <div class="card" (click)="toggleSecondCard()">
+    <h1>{{ displayedText }}</h1>
+  </div>
+
+  <!-- Second Card -->
+  @if (isSecondCardVisible) {
+    <div class="card" (click)="toggleThirdCard()">
+      <h1>I am the host for the application!</h1>
+    </div>
+  }
+
+  <!-- Third Card -->
+  @if (isThirdCardVisible) {
+    <div class="card">
+      <h1>Welcome to an experimental app</h1>
       <p>
-        Welcome to an experimental app that showcases different integration examples, along with exciting features that were introduced while learning and upskilling.
+        that showcases different integration examples, along with exciting features
+        that were introduced while learning and upskilling.
       </p>
     </div>
-  </div>
-  
+  }
+</div>

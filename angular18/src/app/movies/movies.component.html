@@ -22,7 +22,7 @@
 
   <!-- Year Filter -->
   <div class="year-filter-container">
-    <label for="year-select" class="year-label">Filter by Year:</label>
+    <label for="year-select" class="year-label">Filter by Year: </label>
     <select id="year-select" (change)="onYearChange($event)" class="year-select">
       <option *ngFor="let year of years" [value]="year" [selected]="year === selectedYear">
         {{ year }}
@@ -73,6 +73,10 @@
 </div>
 
 <ng-template #noData>
-  <p *ngIf="movies.length === 0 && !loading">No movies available for the selected year.</p>
-  <p *ngIf="loading">Movies are getting Loaded...</p>
+  <p *ngIf="movies.length === 0 && !loading" class="no-data-message">
+    No movies available for the selected year.
+  </p>
+  <p *ngIf="loading" class="loading-message">
+    Movies are getting Loaded...
+  </p>
 </ng-template>

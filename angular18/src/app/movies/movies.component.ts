@@ -113,6 +113,7 @@ export class MoviesComponent implements OnInit {
   }
 
   loadMovies(page: number, size: number): void {
+    this.loading = true;
     this.userService.getMovies(page, size).subscribe({
       next: (data: any) => {
         this.movies = data.content;
@@ -120,6 +121,7 @@ export class MoviesComponent implements OnInit {
         this.totalPages = data.totalPages;
       },
       error: (err) => {
+        this.loading = true;
         console.error('Error fetching movies', err);
       },
     });
