@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from './auth-service.service';
-// Ensure this service handles your authentication logic
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -9,13 +10,16 @@ import { AuthService } from './auth-service.service';
 export class AuthGuard implements CanActivate {
   constructor(private authService: AuthService, private router: Router) {}
 
-  canActivate(): boolean {
-    if (this.authService.isLoggedIn()) {
-      // Use a proper method to check authentication
-      return true;
-    } else {
-      this.router.navigate(['/login']);
-      return false;
-    }
+  canActivate(): Observable<boolean> {
+    return this.authService.$user.pipe(
+      map((user) => {
+        if (user) {
+          return true;  // User is authenticated, allow access
+        } else {
+          this.router.navigate(['/login']);  // Redirect to login if not authenticated
+          return false;
+        }
+      })
+    );
   }
 }
