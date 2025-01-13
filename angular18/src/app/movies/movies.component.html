@@ -37,11 +37,12 @@
 
   <!-- Grid Container for Movie Cards -->
   <div class="movie-grid">
+    @for(movie of movies; track movie._id){
     <app-movie-card 
-      *ngFor="let movie of movies; trackBy: trackByMovieId" 
       [movie]="movie" 
       (movieClicked)="showMovieDetails($event)">
     </app-movie-card>
+  }
   </div>
 
   <!-- Movie Details Modal (if selected) -->

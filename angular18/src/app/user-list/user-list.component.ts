@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../user-service.service';
-import { CommonModule } from '@angular/common';
+import { CommonModule,NgFor } from '@angular/common';
 import { User } from '../modals/User';
 
 @Component({

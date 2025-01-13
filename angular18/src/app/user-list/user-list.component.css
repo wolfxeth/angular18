@@ -25,7 +25,7 @@ body {
 .loading-container p {
   margin-top: 15px;
   font-size: 18px;
-  color: #ffff; /* Change the color here */
+  color: hsl(0, 0%, 0%); /* Change the color here */
   font-weight: 500;
 }
 

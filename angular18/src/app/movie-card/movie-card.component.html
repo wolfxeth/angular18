@@ -1,5 +1,5 @@
 <div class="movie-card" (click)="onCardClick()">
-    <img [src]="movie.poster" alt="Movie Poster" class="movie-poster" (error)="setDefaultPoster($event)">
+    <img [src]="movie().poster" alt="Movie Poster" class="movie-poster" (error)="setDefaultPoster($event)">
     <!-- <h2>{{ movie.title }}</h2>
     <p>{{ movie.genres }}</p>
     <p>{{"Length:" + movie.runtime + " min"}}</p> -->
