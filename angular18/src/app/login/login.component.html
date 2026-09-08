@@ -1,62 +1,69 @@
-<form class="login-form-container" [formGroup]="loginForm">
-  <h3 class="form-title">Login</h3>
+<div class="auth-page">
+  <div class="auth-blob blob-a"></div>
+  <div class="auth-blob blob-b"></div>
 
-  <!-- Error Message -->
-  @if (errorMessage) {
-    <div class="error-message">
-      {{ errorMessage }}
+  <div class="auth-panel glass fade-in-up">
+    <div class="auth-brand">
+      <span class="brand-mark">A</span>
+      <h2>Welcome back</h2>
+      <p class="auth-subtitle">Sign in to continue to the showcase</p>
     </div>
-  }
 
-  <!-- Email Field -->
-  <mat-form-field class="form-field" appearance="outline">
-    <mat-label>Email</mat-label>
-    <input 
-      matInput 
-      type="email" 
-      formControlName="email" 
-      placeholder="Enter your email" 
-    />
-    @if (loginForm.get('email')?.hasError('required')) {
-      <mat-error>Email is required</mat-error>
-    }
-    @if (loginForm.get('email')?.hasError('email')) {
-      <mat-error>Invalid email format</mat-error>
-    }
-  </mat-form-field>
+    <form class="login-form-container" [formGroup]="loginForm">
+      @if (errorMessage) {
+        <div class="error-message">
+          <span class="material-icons-round">error_outline</span>
+          {{ errorMessage }}
+        </div>
+      }
 
-  <!-- Password Field -->
-  <mat-form-field class="form-field" appearance="outline">
-    <mat-label>Password</mat-label>
-    <input 
-      matInput 
-      type="password" 
-      formControlName="password" 
-      placeholder="Enter your password" 
-    />
-    @if (loginForm.get('password')?.hasError('required')) {
-      <mat-error>Password is required</mat-error>
-    }
-  </mat-form-field>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+        @if (loginForm.get('email')?.hasError('required')) {
+          <mat-error>Email is required</mat-error>
+        }
+        @if (loginForm.get('email')?.hasError('email')) {
+          <mat-error>Invalid email format</mat-error>
+        }
+      </mat-form-field>
 
-  <!-- Login Button -->
-  <button 
-    mat-raised-button 
-    color="primary" 
-    (click)="submit()" 
-    [disabled]="loginForm.invalid" 
-    class="login-button"
-  >
-    LOGIN
-  </button>
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+        @if (loginForm.get('password')?.hasError('required')) {
+          <mat-error>Password is required</mat-error>
+        }
+      </mat-form-field>
 
-   <!-- Register Button -->
-   <button 
-   mat-button 
-   color="accent" 
-   class="register-button" 
-   (click)="navigateToRegister()"
- >
-   REGISTER
- </button>
-</form>
+      <button
+        mat-raised-button
+        color="primary"
+        (click)="submit()"
+        [disabled]="loginForm.invalid"
+        class="login-button"
+      >
+        Login
+      </button>
+
+      <button
+        mat-button
+        type="button"
+        class="register-button"
+        (click)="navigateToRegister()"
+      >
+        Don't have an account? <strong>Register</strong>
+      </button>
+    </form>
+  </div>
+</div>

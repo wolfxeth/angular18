@@ -1,69 +1,77 @@
-<form class="login-form-container" [formGroup]="form">
-  <h3 class="form-title">Register</h3>
+<div class="auth-page">
+  <div class="auth-blob blob-a"></div>
+  <div class="auth-blob blob-b"></div>
 
-  <!-- Error Message -->
-  <div *ngIf="errorMessage" class="error-message">
-    {{ errorMessage }}
+  <div class="auth-panel glass fade-in-up">
+    <div class="auth-brand">
+      <span class="brand-mark">A</span>
+      <h2>Create an account</h2>
+      <p class="auth-subtitle">Join the showcase in a few seconds</p>
+    </div>
+
+    <form class="login-form-container" [formGroup]="form">
+      @if (errorMessage) {
+        <div class="error-message">
+          <span class="material-icons-round">error_outline</span>
+          {{ errorMessage }}
+        </div>
+      }
+
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Username</mat-label>
+        <input
+          matInput
+          type="text"
+          formControlName="username"
+          placeholder="Enter your username"
+        />
+        @if (form.get('username')?.hasError('required')) {
+          <mat-error>Username is required</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Email</mat-label>
+        <input
+          matInput
+          type="email"
+          formControlName="email"
+          placeholder="Enter your email"
+        />
+        @if (form.get('email')?.hasError('required')) {
+          <mat-error>Email is required</mat-error>
+        }
+        @if (form.get('email')?.hasError('email')) {
+          <mat-error>Invalid email format</mat-error>
+        }
+      </mat-form-field>
+
+      <mat-form-field class="form-field" appearance="outline">
+        <mat-label>Password</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="password"
+          placeholder="Enter your password"
+        />
+        @if (form.get('password')?.hasError('required')) {
+          <mat-error>Password is required</mat-error>
+        }
+      </mat-form-field>
+
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="form.invalid"
+        (click)="onSubmit()"
+        class="login-button"
+      >
+        Sign Up
+      </button>
+
+      <button mat-button type="button" class="register-button" (click)="navigateToLogin()">
+        Already have an account? <strong>Login</strong>
+      </button>
+    </form>
   </div>
-
-  <!-- Username Field -->
-  <mat-form-field class="form-field" appearance="outline">
-    <mat-label>Username</mat-label>
-    <input 
-      matInput 
-      type="text" 
-      formControlName="username" 
-      placeholder="Enter your username"
-    />
-    <mat-error *ngIf="form.get('username')?.hasError('required')">
-      Username is required
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Email Field -->
-  <mat-form-field class="form-field" appearance="outline">
-    <mat-label>Email</mat-label>
-    <input 
-      matInput 
-      type="email" 
-      formControlName="email" 
-      placeholder="Enter your email"
-    />
-    <mat-error *ngIf="form.get('email')?.hasError('required')">
-      Email is required
-    </mat-error>
-    <mat-error *ngIf="form.get('email')?.hasError('email')">
-      Invalid email format
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Password Field -->
-  <mat-form-field class="form-field" appearance="outline">
-    <mat-label>Password</mat-label>
-    <input 
-      matInput 
-      type="password" 
-      formControlName="password" 
-      placeholder="Enter your password"
-    />
-    <mat-error *ngIf="form.get('password')?.hasError('required')">
-      Password is required
-    </mat-error>
-  </mat-form-field>
-
-  <!-- Register Button -->
-  <button 
-    mat-raised-button 
-    color="primary" 
-    [disabled]="form.invalid" 
-    (click)="onSubmit()" 
-    class="login-button"
-  >
-    SIGN UP
-  </button>
-
-  <!-- Back to Login Button -->
-  <button mat-button color="accent" (click)="navigateToLogin()">
-    Back to Login
-  </button>
-</form>
+</div>
