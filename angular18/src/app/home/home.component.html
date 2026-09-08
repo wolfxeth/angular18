@@ -1,24 +1,37 @@
-<div class="welcome-container">
-  <!-- First Card -->
-  <div class="card" (click)="toggleSecondCard()">
-    <h1>{{ displayedText }}</h1>
+<section class="hero">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="hero-blob blob-3"></div>
+
+  <div class="hero-content">
+    <span class="eyebrow fade-in-up">Welcome to the showcase</span>
+    <h1 class="headline fade-in-up" style="animation-delay:.05s">
+      {{ displayedText }}<span class="cursor">|</span>
+    </h1>
+    <p class="subline fade-in-up" style="animation-delay:.15s">
+      I am your host for the application — an experimental playground built
+      while learning and upskilling across the modern web stack.
+    </p>
+
+    <div class="cta-row fade-in-up" style="animation-delay:.25s">
+      <button class="cta primary" routerLink="/movies">
+        <span class="material-icons-round">movie</span> Explore Movies
+      </button>
+      <button class="cta ghost" routerLink="/users">
+        <span class="material-icons-round">groups</span> View Users
+      </button>
+    </div>
   </div>
+</section>
 
-  <!-- Second Card -->
-  @if (isSecondCardVisible) {
-    <div class="card" (click)="toggleThirdCard()">
-      <h1>I am your host for the application!</h1>
+<section class="features">
+  @for (feature of features; track feature.title; let i = $index) {
+    <div class="feature-card fade-in-up" [style.animation-delay.ms]="i * 120">
+      <div class="feature-icon" [style.background]="feature.gradient">
+        <span class="material-icons-round">{{ feature.icon }}</span>
+      </div>
+      <h3>{{ feature.title }}</h3>
+      <p>{{ feature.description }}</p>
     </div>
   }
-
-  <!-- Third Card -->
-  @if (isThirdCardVisible) {
-    <div class="card">
-      <h1>Welcome to an experimental app</h1>
-      <p>
-        that showcases different integration examples, along with exciting features
-        that were introduced while learning and upskilling.
-      </p>
-    </div>
-  }
-</div>
+</section>

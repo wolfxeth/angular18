@@ -1,30 +1,37 @@
 <div class="layout-container">
-  <header class="side-header">
-    <!-- Add logo section -->
-    <div class="logo-container">
-      <img src="LOGO.png" alt="Logo" class="logo" />
-    </div>
-    <nav>
-      <!-- Use buttons with routerLinkActive -->
-      @if(authService.currentUserSig()){
-      <button routerLink="/home" routerLinkActive="active">Home</button>
-      <button routerLink="/users" routerLinkActive="active">User Details</button>
-      <button routerLink="/movies" routerLinkActive="active">Movies</button>
-      
-      <button (click)="logoutcall()" routerLinkActive="active">Logout</button>
-      }
+  <header class="side-header" [class.scrolled]="scrolled">
+    <a class="brand" routerLink="/home">
+      <span class="brand-mark">A</span>
+      <span class="brand-name">Akshay<span class="accent">.dev</span></span>
+    </a>
 
-    </nav>
-     <!-- Google Login Section -->
-     <!-- <div class="auth-section">
-      <div *ngIf="user; else loggedOut">
-        <span>Welcome, {{ user.name }}</span>
-        <button (click)="signOut()">Sign Out</button>
-      </div>
-      <ng-template #loggedOut>
-        <button (click)="signInWithGoogle()">Sign In with Google</button>
-      </ng-template>
-    </div> -->
+    @if(authService.currentUserSig()){
+      <nav class="nav-links" [class.open]="menuOpen">
+        <button routerLink="/home" routerLinkActive="active" (click)="closeMenu()">
+          <span class="material-icons-round">home</span> Home
+        </button>
+        <button routerLink="/users" routerLinkActive="active" (click)="closeMenu()">
+          <span class="material-icons-round">groups</span> Users
+        </button>
+        <button routerLink="/movies" routerLinkActive="active" (click)="closeMenu()">
+          <span class="material-icons-round">movie</span> Movies
+        </button>
+
+        <div class="nav-divider"></div>
+
+        <div class="user-chip">
+          <span class="avatar">{{ initials() }}</span>
+          <span class="username">{{ authService.currentUserSig()?.username || authService.currentUserSig()?.email }}</span>
+        </div>
+        <button class="logout-btn" (click)="logoutcall()">
+          <span class="material-icons-round">logout</span> Logout
+        </button>
+      </nav>
+
+      <button class="menu-toggle" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    }
   </header>
   <main class="main-content">
     <!-- Main content goes here -->

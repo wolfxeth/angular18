@@ -1,241 +1,335 @@
+/* Hero / toolbar */
+.movies-hero {
+  position: relative;
+  z-index: 5;
+  margin-bottom: 28px;
+}
+
+.movies-hero .eyebrow {
+  display: inline-block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-3);
+  margin-bottom: 6px;
+}
+
+.movies-hero h1 {
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  color: var(--text-0);
+  margin-bottom: 20px;
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.search-container {
+  position: relative;
+  z-index: 5;
+  flex: 1;
+  min-width: 240px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-2);
+  pointer-events: none;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 16px 12px 44px;
+  font-size: 0.95rem;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-0);
+  transition: border-color 0.25s var(--ease), box-shadow 0.25s var(--ease);
+}
+
+.search-input::placeholder {
+  color: var(--text-2);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--accent-1);
+  box-shadow: 0 0 0 4px rgba(124, 92, 255, 0.18);
+}
+
+.year-filter-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  color: var(--text-1);
+}
+
+.year-select {
+  padding: 4px 8px;
+  font-size: 0.9rem;
+  border: none;
+  background: transparent;
+  color: var(--text-0);
+  cursor: pointer;
+  color-scheme: dark;
+}
+
+.year-select:focus {
+  outline: none;
+}
+
+.year-select option {
+  background: var(--bg-2);
+  color: var(--text-0);
+}
+
 /* Movie Grid Layout */
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Creates columns with min 200px width */
-  gap: 24px; /* Increased space between grid items */
-  margin-top: 20px;
-  align-items: stretch; /* Ensures grid items stretch to the same height */
-}
-
-/* Movie Card Styling */
-.movie-card {
-  background-color: hsl(325.11deg 62% 29% / 32%);
-  border-radius: 1px;
-  padding: 0px;
-  text-align: left; /* Align text to the left */
-  box-shadow: 0 4px 8px hwb(0 83% 14% / 0.834);
-  display: flex;
-  flex-direction: column;
-  height: 100%; /* Ensure the card stretches to fill the grid cell */
-  cursor: pointer; /* Make it clear the card is clickable */
-  overflow: hidden; /* Ensure no extra space in the card */
-  max-width: 100%; /* Ensure the card doesn't overflow */
-  margin-bottom: 16px; /* Add extra bottom spacing for individual cards */
-}
-
-/* Adjust hover effect */
-.movie-card:hover {
-  transform: scale(1.05);
-  transition: transform 0.3s ease;
-}
-
-/* Movie title and description */
-.movie-card h2 {
-  font-size: 16px;
-  margin-top: 5px;  /* Reduced space from the top */
-  font-weight: bold;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  color: white;
-  margin-bottom: 3px; /* Reduced space between title and description */
-}
-
-.movie-card p {
-  font-size: 14px;
-  color: white;
-  margin-top: 3px;  /* Reduced space between title and description */
-  margin-bottom: 5px; /* Space between description and bottom of card */
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  flex-grow: 1;  /* Allows the paragraph to expand and fill space */
-}
-
-/* Poster Image Styling */
-.movie-poster {
-  width: 100%;
-  height: auto;
-  max-height: 300px;  /* Increased height of the poster for better visual balance */
-  object-fit: cover;  /* Ensure the image fills the space without distorting */
-  border-radius: 1px;
-  margin-bottom: 10px;  /* Slightly increase space between poster and text */
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 22px;
+  margin-top: 8px;
 }
 
 /* Movie Details Modal Styling */
 .movie-details-modal {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
+  inset: 0;
+  background-color: rgba(5, 6, 15, 0.75);
+  backdrop-filter: blur(6px);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 9999;
+  padding: 20px;
+  animation: fade-in 0.25s var(--ease);
 }
 
 /* Flex Layout for Modal */
 .modal-content {
-  display: flex;
-  background-color:#0000008f;
-  padding: 20px;
-  border-radius: 8px;
-  max-width: 800px;
-  width: 90%;
-  text-align: left;
   position: relative;
-  align-items: center;
+  display: flex;
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  padding: 28px;
+  border-radius: var(--radius-lg);
+  max-width: 800px;
+  width: 100%;
+  text-align: left;
+  align-items: flex-start;
+  gap: 24px;
+  box-shadow: var(--shadow-soft);
 }
 
 /* Modal Content Styling (Text & Details) */
 .modal-text {
-  margin-left: 20px; /* Space between the poster and text */
   flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-text h2 {
+  font-size: 1.5rem;
+  color: var(--text-0);
+}
+
+.modal-text p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+}
+
+.modal-plot {
+  color: var(--text-1);
+  margin: 4px 0 4px;
+}
+
+.modal-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 4px 0;
+}
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  background: var(--surface-strong);
+  color: var(--text-1);
+}
+
+.tag.rating {
+  background: rgba(250, 204, 21, 0.16);
+  color: #facc15;
+}
+
+.tag.rating .material-icons-round {
+  font-size: 0.95rem;
 }
 
 /* Poster image in the modal */
 .modal-poster {
-  width: 200px;  /* Fixed width for the poster */
-  height: auto;
+  width: 200px;
+  flex-shrink: 0;
+  border-radius: var(--radius-md);
   object-fit: cover;
-  border-radius: 8px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
 /* Close button styling */
 .close-btn {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 30px;
-  font-weight: bold;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--surface);
   cursor: pointer;
-  color: #333;
+  color: var(--text-1);
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
 }
 
 .close-btn:hover {
-  color: #f44336;
+  background: rgba(251, 113, 133, 0.2);
+  color: #ffb4c1;
+  transform: rotate(90deg);
+}
+
+@media (max-width: 600px) {
+  .modal-content {
+    flex-direction: column;
+  }
+  .modal-poster {
+    width: 100%;
+  }
 }
 
 /* Pagination Controls */
 .pagination {
-  text-align: center;
-  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 32px;
+  flex-wrap: wrap;
 }
 
 .pagination button {
-  padding: 8px 12px;
-  margin: 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 38px;
+  height: 38px;
+  padding: 0 10px;
   cursor: pointer;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  font-size: 14px;
+  background: var(--surface);
+  color: var(--text-1);
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  font-size: 0.85rem;
+  transition: background 0.2s var(--ease), color 0.2s var(--ease), transform 0.2s var(--ease);
 }
 
 .pagination button:disabled {
-  background-color: #ccc;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .pagination button.active {
-  background-color: #0056b3;
+  background: var(--accent-gradient);
+  color: white;
+  border-color: transparent;
 }
 
-.pagination button:hover {
-  background-color: #0056b3;
-}
-
-.header {
-  position: relative; /* Ensure dropdown is positioned relative to the header */
-  display: flex;
-  align-items: center;
-  justify-content: space-between; /* Adjust alignment if needed */
-  gap: 15px; /* Space between elements */
-  margin-bottom: 20px;
-  background-color: hsl(0, 0%, 0%); /* Light background for the filter */
-  padding: 10px 20px;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  overflow: visible; /* Allow the dropdown to expand outside the header */
-  z-index: 2; /* Ensure it appears above other elements */
-}
-
-.header label {
-  font-size: 16px;
-  font-weight: bold;
-  margin: 0;
-}
-
-.header select {
-  padding: 5px 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #fff;
-  cursor: pointer;
-  transition: border-color 0.2s;
-}
-
-.header select:hover {
-  border-color: #007bff;
-}
-
-.header select:focus {
-  border-color: #007bff;
-  outline: none;
-}
-
-/* Input field styling */
-.search-input {
-  padding: 8px 12px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  width: 300px; /* Adjust width as needed */
+.pagination button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  background: var(--surface-strong);
 }
 
 /* Suggestion List */
 .suggestion-list {
   position: absolute;
-  top: calc(100% + 5px); /* Position below the input field with spacing */
+  top: calc(100% + 8px);
   left: 0;
-  width: 100%; /* Match the input width */
-  background-color: #000000;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-height: 200px; /* Limit dropdown height */
-  overflow-y: auto; /* Enable scrolling if content overflows */
-  z-index: 3; /* Ensure dropdown appears above other elements */
+  width: 100%;
+  background: var(--bg-2);
+  border: 1px solid var(--border-soft);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-soft);
+  max-height: 240px;
+  overflow-y: auto;
+  z-index: 20;
+  list-style: none;
+  margin: 0;
+  padding: 6px;
+  animation: fade-in-up 0.2s var(--ease);
 }
 
 /* Suggestion Item */
 .suggestion-item {
-  padding: 8px 12px;
-  font-size: 14px;
+  padding: 10px 12px;
+  font-size: 0.9rem;
+  color: var(--text-1);
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: background-color 0.2s, color 0.2s;
 }
 
 .suggestion-item:hover {
-  background-color: hsl(0, 0%, 0%);
+  background: var(--surface-strong);
+  color: var(--text-0);
 }
 
-.no-data-message {
-  font-size: 1.5rem; /* Increase the font size */
-  font-weight: bold; /* Optional: Make the text bold */
-  text-align: center; /* Optional: Center align the text */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4), 0 0 25px hsl(0, 0%, 0%), 0 0 5px #000000; /* Add text shadow to create a border effect */
+/* Empty / loading state */
+.state-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  padding: 80px 20px;
+  color: var(--text-1);
+  text-align: center;
 }
 
+.state-message .material-icons-round {
+  font-size: 3rem;
+  color: var(--text-2);
+}
+
+.no-data-message,
 .loading-message {
-  font-size: 1.5rem; /* Increase the font size */
-  font-weight: bold; /* Optional: Make the text bold */
-  text-align: center; /* Optional: Center align the text */
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4), 0 0 25px hwb(0 0% 100%), 0 0 5px #090909; /* Add text shadow to create a border effect */
+  font-size: 1.1rem;
+  font-weight: 600;
 }
 
+.loading-spinner {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 3px solid var(--border-soft);
+  border-top-color: var(--accent-1);
+  animation: spin 0.9s linear infinite;
+}
 

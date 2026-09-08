@@ -8,12 +8,12 @@ import { Movies } from './modals/Movies';
   providedIn: 'root',
 })
 export class UserService {
-  private apiUrl =
-    'https://cloudruntest-springboot-755498942514.us-central1.run.app/api/users';
-  private apiMovies =
-    'https://cloudruntest-springboot-755498942514.us-central1.run.app/api/movies';
-  //private apiMovies = 'http://localhost:8080/api/movies';
-  //private apiUrl = 'http://localhost:8080/api/users';
+  //private apiUrl =
+  //  'https://cloudruntest-springboot-755498942514.us-central1.run.app/api/users';
+  //private apiMovies =
+    //'https://cloudruntest-springboot-755498942514.us-central1.run.app/api/movies';
+  private apiMovies = 'http://localhost:8080/api/movies';
+  private apiUrl = 'http://localhost:8080/api/users';
 
   constructor(private http: HttpClient) {}
 

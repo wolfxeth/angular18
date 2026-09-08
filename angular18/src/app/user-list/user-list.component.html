@@ -1,5 +1,3 @@
-<!-- older implementation -->
-<!-- <div *ngIf="isLoading" class="loading-container"> -->
 @if (isLoading) {
   <div class="loading-container">
     <div class="loading-spinner"></div>
@@ -8,22 +6,29 @@
 }
 
 @if (!isLoading) {
+  <div class="page-header fade-in-up">
+    <span class="eyebrow">Directory</span>
+    <h1>Registered users</h1>
+    <p class="subtitle">{{ users.length }} people onboard</p>
+  </div>
+
   <div class="user-card-container">
-    <!-- <div *ngIf="!isLoading" class="user-card-container">-->
-    @for (user of users; track user.id) { <!-- we have to mention a identifier everytime we use @for-->
-      <div class="user-card">
+    @for (user of users; track user.id; let i = $index) {
+      <div class="user-card fade-in-up" [style.animation-delay.ms]="i * 40" [class.expanded]="selectedUserId === user.id">
         <div
           class="user-name"
           (mouseenter)="onHover(user.id)"
           (mouseleave)="onLeave()"
           (click)="onHover(user.id)"
+          (keydown.enter)="onHover(user.id)"
         >
-          {{ user.name }}
+          <span class="avatar">{{ getInitials(user.name) }}</span>
+          <span class="name-text">{{ user.name }}</span>
         </div>
         @if (selectedUserId === user.id) {
           <div class="user-details">
-            <p>Email: {{ user.email }}</p>
-            <p>ID: {{ user.id }}</p>
+            <p><span class="material-icons-round">mail</span>{{ user.email }}</p>
+            <p><span class="material-icons-round">badge</span>{{ user.id }}</p>
           </div>
         }
       </div>

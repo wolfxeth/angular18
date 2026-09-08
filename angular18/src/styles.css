@@ -1,28 +1,134 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --bg-0: #05060f;
+  --bg-1: #0b0d1e;
+  --bg-2: #12142b;
+  --surface: rgba(255, 255, 255, 0.06);
+  --surface-strong: rgba(255, 255, 255, 0.1);
+  --border-soft: rgba(255, 255, 255, 0.12);
+  --text-0: #f5f6fb;
+  --text-1: #b8bcd6;
+  --text-2: #7d81a3;
+  --accent-1: #7c5cff;
+  --accent-2: #ff5cad;
+  --accent-3: #22d3ee;
+  --accent-gradient: linear-gradient(135deg, var(--accent-1), var(--accent-2));
+  --accent-gradient-2: linear-gradient(120deg, var(--accent-3), var(--accent-1));
+  --success: #34d399;
+  --danger: #fb7185;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.45);
+  --shadow-glow: 0 0 40px rgba(124, 92, 255, 0.35);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
 * {
-    box-sizing: border-box;
-  }
-  
-  html {
-    height: 100%;
-  }
+  box-sizing: border-box;
+}
 
-  body {
-    font-family: Roboto, Helvetica, Arial, sans-serif;;
-    /* background: radial-gradient(circle at top left, #181023, #0b0519); */
-    background: white;
-    color:#FFD700;
-    /* color: black; */
-    margin: 0;
-    padding: 0;
-    height: 100%;
-    padding-left: 100px;
-    padding-right: 100px;
-    
-  }
+html {
+  height: 100%;
+  scroll-behavior: smooth;
+}
 
-  
-  
-  
+body {
+  font-family: 'Inter', 'Roboto', Helvetica, Arial, sans-serif;
+  background: radial-gradient(1200px 700px at 10% -10%, #1b1440 0%, transparent 55%),
+    radial-gradient(1000px 600px at 110% 10%, #0e2a3d 0%, transparent 50%),
+    var(--bg-0);
+  background-attachment: fixed;
+  color: var(--text-0);
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Sora', 'Inter', sans-serif;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  color: var(--text-1);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(var(--accent-1), var(--accent-2));
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: padding-box;
+}
+
+/* Reusable glass surface */
+.glass {
+  background: var(--surface);
+  border: 1px solid var(--border-soft);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  box-shadow: var(--shadow-soft);
+}
+
+/* Shared entrance animations */
+@keyframes fade-in-up {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pop-in {
+  0% { opacity: 0; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes float-blob {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33% { transform: translate(4%, -6%) scale(1.08); }
+  66% { transform: translate(-3%, 4%) scale(0.95); }
+}
+
+@keyframes gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.fade-in-up {
+  animation: fade-in-up 0.6s var(--ease) both;
+}
+
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

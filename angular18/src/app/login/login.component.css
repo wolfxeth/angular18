@@ -1,42 +1,85 @@
+.auth-page {
+  position: relative;
+  min-height: calc(100vh - 76px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 20px;
+}
+
+.auth-blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.5;
+  animation: float-blob 16s ease-in-out infinite;
+  z-index: 0;
+}
+
+.blob-a {
+  width: 380px;
+  height: 380px;
+  background: var(--accent-1);
+  top: -80px;
+  left: -60px;
+}
+
+.blob-b {
+  width: 320px;
+  height: 320px;
+  background: var(--accent-3);
+  bottom: -100px;
+  right: -60px;
+  animation-delay: -6s;
+}
+
+.auth-panel {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  border-radius: var(--radius-lg);
+  padding: 40px 36px;
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.auth-brand .brand-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: var(--accent-gradient);
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-glow);
+}
+
+.auth-brand h2 {
+  font-size: 1.6rem;
+  color: var(--text-0);
+  margin-bottom: 6px;
+}
+
+.auth-subtitle {
+  color: var(--text-1);
+  font-size: 0.92rem;
+}
+
 /* Login Form Container */
 .login-form-container {
-  position: relative; /* For layered effect */
-  background: white; /* Card background */
-  padding: 40px;
-  border-radius: 15px; /* Rounded corners */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
-  color: #333;
-  width: 400px; /* Fixed width */
-  min-height: 500px; /* Set minimum height for consistent size */
   display: flex;
-  flex-direction: column; /* Stack content vertically */
-  justify-content: center; /* Center content vertically */
-  gap: 20px; /* Space between form fields */
-  margin: 50px auto; /* Center the form */
-  text-align: left; /* Align text to the left */
-  border: 2px solid #ff9900; /* Highlight border */
+  flex-direction: column;
+  gap: 18px;
 }
 
-.login-form-container::before {
-  content: '';
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 100%;
-  height: 100%;
-  background: #ff9900; /* Background color for the shadow */
-  border-radius: 15px; /* Match card border radius */
-  z-index: -1; /* Place behind the card */
-}
-
-/* Title Styling */
-.form-title {
-  text-align: center;
-  font-size: 1.8rem; /* Larger title text */
-  font-weight: bold;
-  color: #333;
-  margin-bottom: 20px;
-}
 
 /* Form Field Styling */
 .form-field {
@@ -51,57 +94,58 @@ mat-form-field {
 .login-button {
   width: 100%;
   padding: 12px;
-  font-size: 1rem;
-  font-weight: bold;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
   text-transform: uppercase;
-  background-color: #6a11cb; /* Purple accent color */
-  color: white;
+  background: var(--accent-gradient) !important;
+  color: white !important;
   border: none;
-  border-radius: 8px; /* Rounded button */
+  border-radius: 10px;
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out, transform 0.2s;
+  box-shadow: 0 12px 28px rgba(124, 92, 255, 0.4);
+  transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease);
 }
 
-.login-button:hover {
-  background-color: #4e0c99; /* Darker purple on hover */
-  transform: translateY(-3px); /* Slight lift effect */
+.login-button:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 34px rgba(124, 92, 255, 0.55);
 }
 
 .login-button:disabled {
-  background-color: #ccc; /* Disabled state color */
+  background: rgba(255, 255, 255, 0.12) !important;
+  color: var(--text-2) !important;
+  box-shadow: none;
   cursor: not-allowed;
 }
 
 /* Error Message Styling */
 .error-message {
-  color: #ff0000; /* Red color for errors */
-  font-size: 0.9rem;
-  font-weight: bold;
-  text-align: center;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #ffb4c1;
+  background: rgba(251, 113, 133, 0.12);
+  border: 1px solid rgba(251, 113, 133, 0.3);
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
 }
+
 .register-button {
   width: 100%;
-  padding: 10px;
-  font-size: 1rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  margin-top: 10px;
+  font-size: 0.88rem;
+  color: var(--text-1) !important;
+}
+
+.register-button strong {
+  color: var(--text-0);
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .login-form-container {
-    width: 90%; /* Adjust width for smaller screens */
-    min-height: auto; /* Remove fixed height on small screens */
-    padding: 20px;
-  }
-
-  .form-title {
-    font-size: 1.5rem;
-  }
-
-  .login-button {
-    font-size: 0.9rem;
-    padding: 10px;
+  .auth-panel {
+    padding: 28px 22px;
   }
 }

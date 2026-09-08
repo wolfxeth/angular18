@@ -1,82 +1,99 @@
-
-<div class="header">
-  <!-- Search Input -->
-  <div class="search-container">
-    <input
-      type="text"
-      class="search-input"
-      [(ngModel)]="searchQuery"
-      (input)="onSearchInput($event)"
-      placeholder="Search movies..."
-    />
-    <ul class="suggestion-list" *ngIf="suggestions.length > 0">
-      <li
-        class="suggestion-item"
-        *ngFor="let suggestion of suggestions"
-        (click)="selectMovie(suggestion)"
-      >
-        {{ suggestion.title }}
-      </li>
-    </ul>
+<section class="movies-hero fade-in-up">
+  <div>
+    <span class="eyebrow">Catalog</span>
+    <h1>Discover your next favorite movie</h1>
   </div>
 
-  <!-- Year Filter -->
-  <div class="year-filter-container">
-    <label for="year-select" class="year-label">Filter by Year: </label>
-    <select id="year-select" (change)="onYearChange($event)" class="year-select">
-      <option *ngFor="let year of years" [value]="year" [selected]="year === selectedYear">
-        {{ year }}
-      </option>
-    </select>
-  </div>
-</div>
+  <div class="toolbar">
+    <div class="search-container">
+      <span class="material-icons-round search-icon">search</span>
+      <input
+        type="text"
+        class="search-input"
+        [(ngModel)]="searchQuery"
+        (input)="onSearchInput($event)"
+        placeholder="Search movies..."
+      />
+      @if (suggestions.length > 0) {
+        <ul class="suggestion-list">
+          @for (suggestion of suggestions; track suggestion._id) {
+            <li class="suggestion-item" (click)="selectMovie(suggestion)" (keydown.enter)="selectMovie(suggestion)">
+              {{ suggestion.title }}
+            </li>
+          }
+        </ul>
+      }
+    </div>
 
-
-<div *ngIf="movies.length > 0; else noData">
-  <h1>Movies List</h1>
-
-  <!-- Grid Container for Movie Cards -->
-  <div class="movie-grid">
-    @for(movie of movies; track movie._id){
-    <app-movie-card 
-      [movie]="movie" 
-      (movieClicked)="showMovieDetails($event)">
-    </app-movie-card>
-  }
-  </div>
-
-  <!-- Movie Details Modal (if selected) -->
-  <div class="movie-details-modal" *ngIf="selectedMovie">
-    <div class="modal-content">
-      <img [src]="selectedMovie.poster" alt="Movie Poster" class="modal-poster">
-      <div class="modal-text">
-        <span class="close-btn" (click)="closeMovieDetails()">&times;</span>
-        <h2>{{ selectedMovie.title }}</h2>
-        <p><strong>Plot:</strong> {{ selectedMovie.plot }}</p>
-        <p><strong>Director:</strong> {{ selectedMovie.directors }}</p>
-        <p><strong>Release Date:</strong> {{ selectedMovie.released | date }}</p>
-        <p><strong>Rating:</strong> {{ selectedMovie.rated }}</p>
-        <p><strong>Genres:</strong> {{ selectedMovie.genres.join(', ') }}</p>
-      </div>
+    <div class="year-filter-container">
+      <span class="material-icons-round">calendar_month</span>
+      <select id="year-select" (change)="onYearChange($event)" class="year-select">
+        @for (year of years; track year) {
+          <option [value]="year" [selected]="year === selectedYear">{{ year }}</option>
+        }
+      </select>
     </div>
   </div>
+</section>
 
-  <!-- Pagination Controls -->
-  <div class="pagination">
-    <button (click)="prevPage()" [disabled]="currentPage <= 0">Previous</button>
-    <button *ngFor="let i of [].constructor(totalPages); let pageIndex = index"
-            (click)="goToPage(pageIndex)" [class.active]="currentPage === pageIndex">
-      {{ pageIndex + 1 }}
-    </button>
-    <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Next</button>
+@if (movies.length > 0) {
+  <div class="movie-grid">
+    @for (movie of movies; track movie._id) {
+      <app-movie-card
+        [movie]="movie"
+        (movieClicked)="showMovieDetails($event)">
+      </app-movie-card>
+    }
   </div>
-</div>
 
-<ng-template #noData>
-  <p *ngIf="movies.length === 0 && !loading" class="no-data-message">
-    No movies available for the selected year.
-  </p>
-  <p *ngIf="loading" class="loading-message">
-    Movies are getting Loaded...
-  </p>
-</ng-template>
+  @if (selectedMovie) {
+    <div class="movie-details-modal" (click)="closeMovieDetails()" (keydown.escape)="closeMovieDetails()">
+      <div class="modal-content fade-in-up" (click)="$event.stopPropagation()" (keydown)="$event.stopPropagation()">
+        <span class="close-btn" (click)="closeMovieDetails()" (keydown.enter)="closeMovieDetails()">
+          <span class="material-icons-round">close</span>
+        </span>
+        <img [src]="selectedMovie.poster" alt="Movie Poster" class="modal-poster">
+        <div class="modal-text">
+          <h2>{{ selectedMovie.title }}</h2>
+          <div class="modal-tags">
+            @if (selectedMovie.rated) { <span class="tag">{{ selectedMovie.rated }}</span> }
+            @if (selectedMovie.imdb?.rating) {
+              <span class="tag rating"><span class="material-icons-round">star</span>{{ selectedMovie.imdb!.rating }}</span>
+            }
+            <span class="tag">{{ selectedMovie.runtime }} min</span>
+          </div>
+          <p class="modal-plot">{{ selectedMovie.plot }}</p>
+          <p><strong>Director:</strong> {{ selectedMovie.directors.join(', ') }}</p>
+          <p><strong>Release Date:</strong> {{ selectedMovie.released | date }}</p>
+          <p><strong>Genres:</strong> {{ selectedMovie.genres.join(', ') }}</p>
+        </div>
+      </div>
+    </div>
+  }
+
+  <div class="pagination">
+    <button (click)="prevPage()" [disabled]="currentPage <= 0">
+      <span class="material-icons-round">chevron_left</span>
+    </button>
+    @for (i of [].constructor(totalPages); let pageIndex = $index; track pageIndex) {
+      <button (click)="goToPage(pageIndex)" [class.active]="currentPage === pageIndex">
+        {{ pageIndex + 1 }}
+      </button>
+    }
+    <button (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">
+      <span class="material-icons-round">chevron_right</span>
+    </button>
+  </div>
+} @else {
+  @if (loading) {
+    <div class="state-message">
+      <div class="loading-spinner"></div>
+      <p class="loading-message">Movies are getting loaded...</p>
+    </div>
+  } @else {
+    <div class="state-message">
+      <span class="material-icons-round">movie_filter</span>
+      <p class="no-data-message">No movies available for the selected year.</p>
+    </div>
+  }
+}
