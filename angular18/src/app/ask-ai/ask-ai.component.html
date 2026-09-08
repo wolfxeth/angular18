@@ -1,0 +1,96 @@
+<section class="ask-hero fade-in-up">
+  <span class="eyebrow">Ask AI</span>
+  <h1>Describe the movie you're in the mood for</h1>
+  <p class="subline">
+    Type a request in plain English &mdash; genre, year, rating, or "movies like&hellip;" &mdash;
+    and an LLM will translate it into a real search.
+  </p>
+
+  <form class="ask-form" (ngSubmit)="ask()">
+    <span class="material-icons-round prompt-icon">auto_awesome</span>
+    <input
+      type="text"
+      class="prompt-input"
+      name="prompt"
+      [(ngModel)]="prompt"
+      placeholder="e.g. top rated romantic movies from 2016"
+      [disabled]="loading"
+    />
+    <button type="submit" class="ask-btn" [disabled]="loading || !prompt.trim()">
+      @if (loading) {
+        <span class="spinner"></span>
+      } @else {
+        <span class="material-icons-round">send</span>
+      }
+      Ask
+    </button>
+  </form>
+
+  <div class="example-row">
+    @for (example of examplePrompts; track example) {
+      <button type="button" class="example-chip" (click)="useExample(example)" [disabled]="loading">
+        {{ example }}
+      </button>
+    }
+  </div>
+</section>
+
+@if (errorMessage) {
+  <div class="ai-error fade-in-up">
+    <span class="material-icons-round">error_outline</span>
+    {{ errorMessage }}
+  </div>
+}
+
+@if (loading) {
+  <div class="ai-thinking fade-in-up">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <p>Thinking about your request&hellip;</p>
+  </div>
+}
+
+@if (response) {
+  <div class="ai-summary fade-in-up">
+    <span class="material-icons-round">psychology</span>
+    <p>{{ response.summary }}</p>
+  </div>
+
+  @if (response.results.length > 0) {
+    <div class="ai-result-grid">
+      @for (result of response.results; track trackByResult($index, result)) {
+        <div class="ai-result-card fade-in-up">
+          <div class="poster-wrap">
+            <img
+              [src]="result.poster || '404.png'"
+              alt="Movie Poster"
+              class="ai-poster"
+              (error)="setDefaultPoster($event)"
+            />
+            <span class="source-badge" [class.tmdb]="result.source === 'tmdb-live'">
+              {{ result.source === 'tmdb-live' ? 'Live · TMDB' : 'Catalog' }}
+            </span>
+            @if (result.rating) {
+              <span class="rating-badge">
+                <span class="material-icons-round">star</span>{{ result.rating }}
+              </span>
+            }
+          </div>
+          <div class="ai-result-info">
+            <h3>{{ result.title }}</h3>
+            <p class="meta">
+              {{ result.year }}
+              @if (result.similarityScore !== null && result.similarityScore !== undefined) {
+                &bull; {{ (result.similarityScore * 100) | number: '1.0-0' }}% match
+              }
+            </p>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="ai-empty">
+      <span class="material-icons-round">search_off</span>
+      <p>No movies matched that request. Try rephrasing it.</p>
+    </div>
+  }
+}

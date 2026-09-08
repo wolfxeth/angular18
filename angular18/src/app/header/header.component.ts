@@ -3,6 +3,7 @@ import { Router, RouterModule } from '@angular/router';
 import { SocialUser } from '@abacritt/angularx-social-login';
 import { CommonModule } from '@angular/common';
 import { AuthService } from '../auth-service.service';
+import { ThemeService } from '../theme.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ export class HeaderComponent {
   user: SocialUser | null = null;
   authService = inject(AuthService);
   router = inject(Router);
+  themeService = inject(ThemeService);
 
   menuOpen = false;
   scrolled = false;

@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HeaderComponent } from "./header/header.component";
 import { AuthService } from './auth-service.service';
+import { ThemeService } from './theme.service';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +14,8 @@ export class AppComponent implements OnInit{
 
   authService=inject(AuthService);
   router=inject(Router);
+  // injected only so its constructor runs and applies the saved/system theme before first paint
+  private themeService=inject(ThemeService);
 
   ngOnInit(): void {
     this.authService.$user.subscribe(user=>{
