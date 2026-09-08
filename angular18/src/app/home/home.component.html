@@ -1,37 +1,167 @@
-<section class="hero">
+<section class="hero split">
   <div class="hero-blob blob-1"></div>
   <div class="hero-blob blob-2"></div>
   <div class="hero-blob blob-3"></div>
 
-  <div class="hero-content">
-    <span class="eyebrow fade-in-up">Welcome to the showcase</span>
-    <h1 class="headline fade-in-up" style="animation-delay:.05s">
-      {{ displayedText }}<span class="cursor">|</span>
-    </h1>
-    <p class="subline fade-in-up" style="animation-delay:.15s">
-      I am your host for the application — an experimental playground built
-      while learning and upskilling across the modern web stack.
-    </p>
+  <div class="hero-grid">
+    <div class="hero-text">
+      <span class="eyebrow fade-in-up">Welcome to the showcase</span>
+      <h1 class="headline fade-in-up" style="animation-delay:.05s">
+        {{ displayedText }}<span class="cursor">|</span>
+      </h1>
+      <p class="subline fade-in-up" style="animation-delay:.15s">
+        I am your host for the application — an experimental playground built
+        while learning and upskilling across the modern web stack.
+      </p>
 
-    <div class="cta-row fade-in-up" style="animation-delay:.25s">
-      <button class="cta primary" routerLink="/movies">
-        <span class="material-icons-round">movie</span> Explore Movies
-      </button>
-      <button class="cta ghost" routerLink="/users">
-        <span class="material-icons-round">groups</span> View Users
-      </button>
+      <div class="cta-row fade-in-up" style="animation-delay:.25s">
+        <button class="cta primary" routerLink="/movies">
+          <span class="material-icons-round">movie</span> Explore Movies
+        </button>
+        <button class="cta ghost" routerLink="/users">
+          <span class="material-icons-round">groups</span> View Users
+        </button>
+      </div>
+
+      <div class="stat-strip fade-in-up" style="animation-delay:.35s">
+        <div class="stat-chip"><strong>7</strong><span>technologies</span></div>
+        <div class="stat-chip"><strong>3</strong><span>AI search modes</span></div>
+        <div class="stat-chip"><strong>100%</strong><span>real data</span></div>
+      </div>
+    </div>
+
+    <div class="hero-visual" aria-hidden="true">
+      <div class="float-card float-card-chat">
+        <div class="chat-bubble user">"Top rated romantic movies from 2013"</div>
+        <div class="chat-bubble bot">
+          <span class="material-icons-round">smart_toy</span>
+          Showing top-rated romantic movies, sorted by rating.
+        </div>
+      </div>
+      <div class="float-card float-card-stack">
+        <span class="material-icons-round">movie_filter</span>
+        <div>
+          <strong>Movie Catalog</strong>
+          <span>Live MongoDB search</span>
+        </div>
+      </div>
+      <div class="float-card float-card-badge">
+        <span class="material-icons-round">bolt</span>
+        <span>Angular 19</span>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="features">
-  @for (feature of features; track feature.title; let i = $index) {
-    <div class="feature-card fade-in-up" [style.animation-delay.ms]="i * 120">
-      <div class="feature-icon" [style.background]="feature.gradient">
-        <span class="material-icons-round">{{ feature.icon }}</span>
-      </div>
-      <h3>{{ feature.title }}</h3>
-      <p>{{ feature.description }}</p>
+<!-- Bento showcase: what you can do -->
+<section class="bento">
+  <div class="stack-header fade-in-up">
+    <span class="eyebrow">What you can do</span>
+    <h2>Explore the experience</h2>
+    <p>Everything below is real, working functionality — not a mockup.</p>
+  </div>
+
+  <div class="bento-grid">
+    <div class="bento-tile ai-tile fade-in-up">
+      <div class="ai-tile-glow"></div>
+      <span class="material-icons-round tile-badge">auto_awesome</span>
+      <h3>Ask AI: search in plain English</h3>
+      <p class="ai-tile-lede">
+        Type "top rated romantic movies from 2013" and Gemini turns it into a real
+        MongoDB query, a semantic embedding match, or a live TMDB lookup.
+      </p>
+
+      <ul class="ai-tile-list">
+        @for (capability of aiCapabilities; track capability.title) {
+          <li>
+            <span class="material-icons-round">{{ capability.icon }}</span>
+            <span>{{ capability.title }}</span>
+          </li>
+        }
+      </ul>
+
+      <button class="cta primary ai-cta" routerLink="/ask-ai">
+        <span class="material-icons-round">auto_awesome</span> Try Ask AI
+      </button>
     </div>
-  }
+
+    @for (feature of features; track feature.title; let i = $index) {
+      <div class="bento-tile fade-in-up" [style.animation-delay.ms]="i * 100">
+        <div class="feature-icon" [style.background]="feature.gradient">
+          <span class="material-icons-round">{{ feature.icon }}</span>
+        </div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </div>
+    }
+  </div>
 </section>
+
+<!-- Tech stack / architecture showcase -->
+<section class="stack-showcase">
+  <div class="stack-header fade-in-up">
+    <span class="eyebrow">Under the hood</span>
+    <h2>What powers this app</h2>
+    <p>A full-stack, cloud-native architecture — every piece chosen to showcase a different modern technology.</p>
+  </div>
+
+  <div class="marquee">
+    <div class="marquee-track">
+      @for (item of techStack; track item.name + '-a') {
+        <div class="marquee-pill">
+          <span class="marquee-icon" [style.background]="item.gradient">{{ item.mark }}</span>
+          <div>
+            <strong>{{ item.name }}</strong>
+            <span>{{ item.role }}</span>
+          </div>
+        </div>
+      }
+      @for (item of techStack; track item.name + '-b') {
+        <div class="marquee-pill">
+          <span class="marquee-icon" [style.background]="item.gradient">{{ item.mark }}</span>
+          <div>
+            <strong>{{ item.name }}</strong>
+            <span>{{ item.role }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="marquee reverse">
+    <div class="marquee-track">
+      @for (item of techStack.slice().reverse(); track item.name + '-c') {
+        <div class="marquee-pill outline">
+          <span class="marquee-icon" [style.background]="item.gradient">{{ item.mark }}</span>
+          <div>
+            <strong>{{ item.name }}</strong>
+            <span>{{ item.description }}</span>
+          </div>
+        </div>
+      }
+      @for (item of techStack.slice().reverse(); track item.name + '-d') {
+        <div class="marquee-pill outline">
+          <span class="marquee-icon" [style.background]="item.gradient">{{ item.mark }}</span>
+          <div>
+            <strong>{{ item.name }}</strong>
+            <span>{{ item.description }}</span>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+
+  <div class="request-path fade-in-up">
+    <span class="path-node"><span class="material-icons-round">web</span>Angular UI</span>
+    <span class="path-line"></span>
+    <span class="path-node"><span class="material-icons-round">dns</span>Spring Boot</span>
+    <span class="path-line"></span>
+    <span class="path-node cluster">
+      <span class="path-node small"><span class="material-icons-round">storage</span>MongoDB</span>
+      <span class="path-node small"><span class="material-icons-round">auto_awesome</span>Gemini</span>
+      <span class="path-node small"><span class="material-icons-round">live_tv</span>TMDB</span>
+      <span class="path-node small"><span class="material-icons-round">local_fire_department</span>Firebase</span>
+    </span>
+  </div>
+</section>
+

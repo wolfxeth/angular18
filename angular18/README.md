@@ -2,6 +2,12 @@
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.6.
 
+## Ask AI movie search
+The "Ask AI" section lets you search movies with plain English. The feature is implemented
+server-side in the `cloudruntest-springboot` project — see its
+[docs/ai-movie-search-explained.md](../../cloudruntest-springboot/docs/ai-movie-search-explained.md)
+for a full, beginner-friendly explanation.
+
 ## Development server
 
 To start a local development server, run:

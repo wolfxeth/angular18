@@ -7,31 +7,62 @@
 
 @if (!isLoading) {
   <div class="page-header fade-in-up">
-    <span class="eyebrow">Directory</span>
-    <h1>Registered users</h1>
-    <p class="subtitle">{{ users.length }} people onboard</p>
+    <div class="page-header-text">
+      <span class="eyebrow">Directory</span>
+      <h1>Registered users</h1>
+      <p class="subtitle">{{ users.length }} people onboard</p>
+    </div>
+
+    <div class="search-container">
+      <span class="material-icons-round search-icon">search</span>
+      <input
+        type="text"
+        class="search-input"
+        [(ngModel)]="searchQuery"
+        placeholder="Search by name or email..."
+      />
+    </div>
   </div>
 
-  <div class="user-card-container">
-    @for (user of users; track user.id; let i = $index) {
-      <div class="user-card fade-in-up" [style.animation-delay.ms]="i * 40" [class.expanded]="selectedUserId === user.id">
-        <div
-          class="user-name"
-          (mouseenter)="onHover(user.id)"
-          (mouseleave)="onLeave()"
-          (click)="onHover(user.id)"
-          (keydown.enter)="onHover(user.id)"
-        >
-          <span class="avatar">{{ getInitials(user.name) }}</span>
-          <span class="name-text">{{ user.name }}</span>
-        </div>
-        @if (selectedUserId === user.id) {
-          <div class="user-details">
-            <p><span class="material-icons-round">mail</span>{{ user.email }}</p>
-            <p><span class="material-icons-round">badge</span>{{ user.id }}</p>
+  @if (filteredUsers.length > 0) {
+    <div class="user-card-container">
+      @for (user of filteredUsers; track user.id; let i = $index) {
+        <div class="user-card fade-in-up" [style.animation-delay.ms]="i * 40" [class.expanded]="selectedUserId === user.id">
+          <div class="card-accent" [style.background]="getAvatarGradient(user.name)"></div>
+          <div
+            class="user-name"
+            (click)="toggleUser(user.id)"
+            (keydown.enter)="toggleUser(user.id)"
+          >
+            <span class="avatar" [style.background]="getAvatarGradient(user.name)">{{ getInitials(user.name) }}</span>
+            <div class="name-block">
+              <span class="name-text">{{ user.name }}</span>
+              <span class="email-text">{{ user.email }}</span>
+            </div>
+            <span class="material-icons-round chevron">{{ selectedUserId === user.id ? 'expand_less' : 'expand_more' }}</span>
           </div>
-        }
-      </div>
-    }
-  </div>
+          @if (selectedUserId === user.id) {
+            <div class="user-details">
+              <div class="detail-row">
+                <span class="material-icons-round">mail</span>
+                <span class="detail-value">{{ user.email }}</span>
+                <button class="copy-btn" (click)="copyEmail($event, user)" type="button">
+                  <span class="material-icons-round">{{ copiedUserId === user.id ? 'check' : 'content_copy' }}</span>
+                </button>
+              </div>
+              <div class="detail-row">
+                <span class="material-icons-round">badge</span>
+                <span class="detail-value id-chip">{{ user.id }}</span>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  } @else {
+    <div class="empty-state fade-in-up">
+      <span class="material-icons-round">person_search</span>
+      <p>No users match "{{ searchQuery }}".</p>
+    </div>
+  }
 }

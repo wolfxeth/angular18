@@ -5,6 +5,7 @@ import { MoviesComponent } from './movies/movies.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './auth.guard'; // Import the AuthGuard
 import { RegisterComponent } from './register/register.component';
+import { AskAiComponent } from './ask-ai/ask-ai.component';
 
 export const routes: Routes = [
   // Login route
@@ -14,6 +15,7 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'users', component: UserListComponent, canActivate: [AuthGuard] },
   { path: 'movies', component: MoviesComponent, canActivate: [AuthGuard] },
+  { path: 'ask-ai', component: AskAiComponent, canActivate: [AuthGuard] },
   { path: 'register', component: RegisterComponent },
 
 

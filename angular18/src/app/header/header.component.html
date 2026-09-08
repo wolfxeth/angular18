@@ -1,37 +1,53 @@
 <div class="layout-container">
   <header class="side-header" [class.scrolled]="scrolled">
     <a class="brand" routerLink="/home">
-      <span class="brand-mark">A</span>
+      <span class="brand-mark">
+        <img src="LOGO2.png" alt="Logo" />
+      </span>
       <span class="brand-name">Akshay<span class="accent">.dev</span></span>
     </a>
 
-    @if(authService.currentUserSig()){
-      <nav class="nav-links" [class.open]="menuOpen">
-        <button routerLink="/home" routerLinkActive="active" (click)="closeMenu()">
-          <span class="material-icons-round">home</span> Home
-        </button>
-        <button routerLink="/users" routerLinkActive="active" (click)="closeMenu()">
-          <span class="material-icons-round">groups</span> Users
-        </button>
-        <button routerLink="/movies" routerLinkActive="active" (click)="closeMenu()">
-          <span class="material-icons-round">movie</span> Movies
-        </button>
-
-        <div class="nav-divider"></div>
-
-        <div class="user-chip">
-          <span class="avatar">{{ initials() }}</span>
-          <span class="username">{{ authService.currentUserSig()?.username || authService.currentUserSig()?.email }}</span>
-        </div>
-        <button class="logout-btn" (click)="logoutcall()">
-          <span class="material-icons-round">logout</span> Logout
-        </button>
-      </nav>
-
-      <button class="menu-toggle" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Toggle menu">
-        <span></span><span></span><span></span>
+    <div class="header-actions">
+      <button
+        class="theme-toggle"
+        (click)="themeService.toggle()"
+        [attr.aria-label]="themeService.theme() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+        type="button"
+      >
+        <span class="material-icons-round">{{ themeService.theme() === 'dark' ? 'light_mode' : 'dark_mode' }}</span>
       </button>
-    }
+
+      @if(authService.currentUserSig()){
+        <nav class="nav-links" [class.open]="menuOpen">
+          <button routerLink="/home" routerLinkActive="active" (click)="closeMenu()">
+            <span class="material-icons-round">home</span> Home
+          </button>
+          <button routerLink="/users" routerLinkActive="active" (click)="closeMenu()">
+            <span class="material-icons-round">groups</span> Users
+          </button>
+          <button routerLink="/movies" routerLinkActive="active" (click)="closeMenu()">
+            <span class="material-icons-round">movie</span> Movies
+          </button>
+          <button routerLink="/ask-ai" routerLinkActive="active" (click)="closeMenu()">
+            <span class="material-icons-round">auto_awesome</span> Ask AI
+          </button>
+
+          <div class="nav-divider"></div>
+
+          <div class="user-chip">
+            <span class="avatar">{{ initials() }}</span>
+            <span class="username">{{ authService.currentUserSig()?.username || authService.currentUserSig()?.email }}</span>
+          </div>
+          <button class="logout-btn" (click)="logoutcall()">
+            <span class="material-icons-round">logout</span> Logout
+          </button>
+        </nav>
+
+        <button class="menu-toggle" (click)="toggleMenu()" [class.active]="menuOpen" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      }
+    </div>
   </header>
   <main class="main-content">
     <!-- Main content goes here -->
