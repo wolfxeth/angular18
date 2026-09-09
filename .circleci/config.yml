@@ -15,7 +15,7 @@ jobs:
           pkg-manager: npm
       - run:
           name: Run tests
-        command: npm test -- --watch=false --browsers=ChromeHeadless
+          command: npm test -- --watch=false --browsers=ChromeHeadless
   build-node:
     # Build node project
     executor: node/default
